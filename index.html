@@ -3,156 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe - Professional Portfolio</title>
+    <title>Alex Chen - Cyber Emerald Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-        }
-        .project-card, .experience-card, .testimonial-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover, .experience-card:hover, .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .skill-bar {
-            height: 8px;
-            border-radius: 4px;
-            background-color: #e5e7eb;
-            overflow: hidden;
-        }
-        .skill-progress {
-            height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transition: width 1s ease-in-out;
-        }
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #3b82f6;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .active-nav::after {
-            width: 100%;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Css files/Style.css">
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body data-theme="dark">
+    <!-- Matrix Background -->
+    <div class="matrix-bg"></div>
+    
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape" style="width: 300px; height: 300px; top: 10%; left: 5%;"></div>
+    <div class="floating-shape" style="width: 200px; height: 200px; top: 60%; right: 10%;"></div>
+    <div class="floating-shape" style="width: 150px; height: 150px; bottom: 10%; left: 20%;"></div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white shadow-md z-50">
+    <nav class="fixed w-full bg-black bg-opacity-80 backdrop-blur-sm z-50 cyber-border">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-600">John Doe</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link active-nav text-indigo-600 font-medium">Home</a>
-                <a href="#about" class="nav-link text-gray-600 hover:text-indigo-600 font-medium">About</a>
-                <a href="#experience" class="nav-link text-gray-600 hover:text-indigo-600 font-medium">Experience</a>
-                <a href="#projects" class="nav-link text-gray-600 hover:text-indigo-600 font-medium">Projects</a>
-                <a href="#skills" class="nav-link text-gray-600 hover:text-indigo-600 font-medium">Skills</a>
-                <a href="#contact" class="nav-link text-gray-600 hover:text-indigo-600 font-medium">Contact</a>
+            <a href="#" class="text-2xl font-bold cyber-font gradient-text">ALEX CHEN</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="nav-link active-nav font-medium cyber-font">HOME</a>
+                <a href="#about" class="nav-link font-medium cyber-font">ABOUT</a>
+                <a href="#experience" class="nav-link font-medium cyber-font">EXPERIENCE</a>
+                <a href="#projects" class="nav-link font-medium cyber-font">PROJECTS</a>
+                <a href="#skills" class="nav-link font-medium cyber-font">SKILLS</a>
+                <a href="#contact" class="nav-link font-medium cyber-font">CONTACT</a>
+                
+                <!-- Theme Toggle -->
+                <div class="theme-toggle ml-4">
+                    <i class="fas fa-sun theme-icon sun-icon"></i>
+                    <i class="fas fa-moon theme-icon moon-icon"></i>
+                </div>
             </div>
-            <button class="md:hidden text-gray-600 focus:outline-none">
+            <button class="md:hidden focus:outline-none" style="color: var(--accent);">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
+        <div class="scan-line"></div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-indigo-50 to-purple-50">
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden hex-pattern">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Hi, I'm <span class="text-indigo-600">John Doe</span></h1>
-                <h2 class="text-xl md:text-2xl text-gray-600 mb-6">Senior Full Stack Developer & UI/UX Designer</h2>
-                <p class="text-gray-600 mb-8 max-w-lg">I create digital experiences that are functional, beautiful, and user-focused. With over 7 years of experience, I help businesses transform their ideas into successful digital products.</p>
+                <div class="terminal-text text-sm mb-2">> INITIALIZING SYSTEM...</div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 cyber-font">HI, I'M <span class="gradient-text">ALEX CHEN</span></h1>
+                <h2 class="text-xl md:text-2xl mb-6 cyber-font glow-text">CYBER SECURITY & FULL-STACK DEVELOPER</h2>
+                <p class="mb-8 max-w-lg">Specializing in secure application development, penetration testing, and blockchain technology. Building the future with code and cryptography.</p>
                 <div class="flex space-x-4">
-                    <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Get In Touch</a>
-                    <a href="#projects" class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium transition duration-300">View My Work</a>
+                    <a href="#contact" class="btn-primary px-6 py-3 rounded-lg cyber-font">CONNECT</a>
+                    <a href="#projects" class="btn-secondary px-6 py-3 rounded-lg font-medium cyber-font">VIEW WORK</a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 bg-indigo-100 rounded-full overflow-hidden border-8 border-white shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="John Doe" class="w-full h-full object-cover">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden pulse" style="border: 3px solid var(--accent);">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Alex Chen" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
+    <section id="about" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">About Me</h2>
+            <h2 class="text-3xl font-bold section-title cyber-font">ABOUT ME</h2>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="md:w-1/2">
-                    <p class="text-gray-600 mb-6">I'm a passionate full-stack developer with a strong focus on creating efficient, scalable, and user-friendly applications. My journey in tech started over 7 years ago, and I've had the privilege of working with startups and established companies alike.</p>
-                    <p class="text-gray-600 mb-6">I believe in the power of technology to solve real-world problems and am constantly learning new tools and techniques to stay at the forefront of the industry.</p>
+                    <p class="mb-6">I'm a cybersecurity specialist and full-stack developer with a passion for building secure, scalable systems. My expertise spans from penetration testing to blockchain development.</p>
+                    <p class="mb-6">I believe in a security-first approach to development, ensuring that every application I build is resilient against modern threats while delivering exceptional user experiences.</p>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">San Francisco, CA</span>
+                            <i class="fas fa-map-marker-alt mr-2" style="color: var(--accent);"></i>
+                            <span>San Francisco, CA</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-envelope text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">john.doe@example.com</span>
+                            <i class="fas fa-envelope mr-2" style="color: var(--accent);"></i>
+                            <span>alex.chen@cyber.dev</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-phone text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">+1 (555) 123-4567</span>
+                            <i class="fas fa-shield-alt mr-2" style="color: var(--accent);"></i>
+                            <span>OSCP, CEH Certified</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-globe text-indigo-600 mr-2"></i>
-                            <span class="text-gray-700">www.johndoe.dev</span>
+                            <i class="fas fa-globe mr-2" style="color: var(--accent);"></i>
+                            <span>www.alexchen.tech</span>
                         </div>
                     </div>
                     <div class="flex space-x-4">
-                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="bg-gray-800 hover:bg-black text-white w-10 h-10 rounded-full flex items-center justify-center">
+                        <a href="#" class="social-icon">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="#" class="bg-pink-600 hover:bg-pink-700 text-white w-10 h-10 rounded-full flex items-center justify-center">
-                            <i class="fab fa-dribbble"></i>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center">
+                        <a href="#" class="social-icon">
                             <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fas fa-blog"></i>
                         </a>
                     </div>
                 </div>
                 <div class="md:w-1/2">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">My Expertise</h3>
+                    <h3 class="text-xl font-semibold mb-4 cyber-font">SECURITY EXPERTISE</h3>
                     <div class="space-y-4">
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Frontend Development</span>
-                                <span class="text-gray-700 font-medium">95%</span>
+                                <span class="font-medium">Penetration Testing</span>
+                                <span class="font-medium">95%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 95%"></div>
@@ -160,8 +120,8 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Backend Development</span>
-                                <span class="text-gray-700 font-medium">90%</span>
+                                <span class="font-medium">Secure Coding</span>
+                                <span class="font-medium">90%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 90%"></div>
@@ -169,20 +129,20 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">UI/UX Design</span>
-                                <span class="text-gray-700 font-medium">85%</span>
+                                <span class="font-medium">Blockchain Security</span>
+                                <span class="font-medium">88%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                                <div class="skill-progress" style="width: 88%"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">DevOps & Cloud</span>
-                                <span class="text-gray-700 font-medium">80%</span>
+                                <span class="font-medium">Incident Response</span>
+                                <span class="font-medium">85%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
+                                <div class="skill-progress" style="width: 85%"></div>
                             </div>
                         </div>
                     </div>
@@ -192,47 +152,34 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-16 bg-gray-50">
+    <section id="experience" class="py-16" style="background-color: var(--card);">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">Work Experience</h2>
+            <h2 class="text-3xl font-bold section-title cyber-font">WORK EXPERIENCE</h2>
             <div class="space-y-8">
-                <div class="experience-card bg-white p-6 rounded-lg shadow-md">
+                <div class="experience-card p-6 rounded-lg">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-semibold text-gray-800">Senior Full Stack Developer</h3>
-                        <span class="text-indigo-600 font-medium">Jan 2020 - Present</span>
+                        <h3 class="text-xl font-semibold cyber-font">SENIOR SECURITY ENGINEER</h3>
+                        <span class="font-medium glow-text">Jan 2020 - Present</span>
                     </div>
-                    <p class="text-gray-700 font-medium mb-2">TechSolutions Inc.</p>
-                    <p class="text-gray-600 mb-4">Leading a team of 5 developers in building scalable web applications for enterprise clients. Implemented agile methodologies that improved project delivery time by 30%.</p>
-                    <ul class="text-gray-600 list-disc pl-5 space-y-1">
-                        <li>Architected and developed a microservices-based platform serving 50,000+ users</li>
-                        <li>Mentored junior developers and conducted technical interviews</li>
-                        <li>Reduced application load time by 40% through performance optimization</li>
+                    <p class="font-medium mb-2 terminal-text">> CYBERFORGE SOLUTIONS</p>
+                    <p class="mb-4">Leading security initiatives for Fortune 500 clients, conducting penetration tests, and developing secure application frameworks.</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Discovered and reported 150+ critical vulnerabilities</li>
+                        <li>Developed a proprietary security scanning tool</li>
+                        <li>Reduced security incidents by 75% for key clients</li>
                     </ul>
                 </div>
-                <div class="experience-card bg-white p-6 rounded-lg shadow-md">
+                <div class="experience-card p-6 rounded-lg">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-semibold text-gray-800">Frontend Developer</h3>
-                        <span class="text-indigo-600 font-medium">Mar 2017 - Dec 2019</span>
+                        <h3 class="text-xl font-semibold cyber-font">BLOCKCHAIN DEVELOPER</h3>
+                        <span class="font-medium glow-text">Mar 2017 - Dec 2019</span>
                     </div>
-                    <p class="text-gray-700 font-medium mb-2">Digital Innovations LLC</p>
-                    <p class="text-gray-600 mb-4">Developed responsive web applications using React, Vue.js, and modern CSS frameworks. Collaborated with UX designers to implement pixel-perfect interfaces.</p>
-                    <ul class="text-gray-600 list-disc pl-5 space-y-1">
-                        <li>Built a component library that improved development efficiency by 25%</li>
-                        <li>Implemented A/B testing framework that increased conversion rates by 15%</li>
-                        <li>Worked closely with clients to gather requirements and provide technical solutions</li>
-                    </ul>
-                </div>
-                <div class="experience-card bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h3 class="text-xl font-semibold text-gray-800">Junior Web Developer</h3>
-                        <span class="text-indigo-600 font-medium">Jun 2015 - Feb 2017</span>
-                    </div>
-                    <p class="text-gray-700 font-medium mb-2">WebCraft Studio</p>
-                    <p class="text-gray-600 mb-4">Developed and maintained websites for small to medium-sized businesses. Gained experience in full-stack development and client communication.</p>
-                    <ul class="text-gray-600 list-disc pl-5 space-y-1">
-                        <li>Created 30+ responsive websites using HTML, CSS, JavaScript, and PHP</li>
-                        <li>Improved website performance leading to 20% faster load times</li>
-                        <li>Provided ongoing maintenance and support for client websites</li>
+                    <p class="font-medium mb-2 terminal-text">> CRYPTOTECH INNOVATIONS</p>
+                    <p class="mb-4">Developed secure smart contracts and blockchain solutions for financial and supply chain applications.</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Audited 50+ smart contracts for security vulnerabilities</li>
+                        <li>Built a decentralized identity verification system</li>
+                        <li>Implemented zero-knowledge proof protocols</li>
                     </ul>
                 </div>
             </div>
@@ -240,58 +187,58 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 bg-white">
+    <section id="projects" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">Featured Projects</h2>
+            <h2 class="text-3xl font-bold section-title cyber-font">SECURITY PROJECTS</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-white text-5xl"></i>
+                <div class="project-card rounded-lg overflow-hidden">
+                    <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent), var(--secondary));">
+                        <i class="fas fa-shield-alt text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">E-Commerce Platform</h3>
-                        <p class="text-gray-600 mb-4">A full-featured online store with inventory management, payment processing, and customer analytics.</p>
+                        <h3 class="text-xl font-semibold mb-2 cyber-font">VULNSCAN AI</h3>
+                        <p class="mb-4">An AI-powered vulnerability scanner that identifies security flaws in web applications using machine learning.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">React</span>
-                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Node.js</span>
-                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">MongoDB</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">TensorFlow</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">React</span>
                         </div>
-                        <a href="#" class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
-                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        <a href="#" class="font-medium flex items-center glow-text">
+                            VIEW PROJECT <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
-                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-5xl"></i>
+                <div class="project-card rounded-lg overflow-hidden">
+                    <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, var(--secondary), #006644);">
+                        <i class="fas fa-link text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Analytics Dashboard</h3>
-                        <p class="text-gray-600 mb-4">A real-time data visualization tool for business metrics with interactive charts and reporting features.</p>
+                        <h3 class="text-xl font-semibold mb-2 cyber-font">SECURE CHAIN</h3>
+                        <p class="mb-4">A blockchain-based supply chain security solution with tamper-proof tracking and verification.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Vue.js</span>
-                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">D3.js</span>
-                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Firebase</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">Solidity</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">Ethereum</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">Node.js</span>
                         </div>
-                        <a href="#" class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
-                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        <a href="#" class="font-medium flex items-center glow-text">
+                            VIEW PROJECT <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
-                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center">
-                        <i class="fas fa-mobile-alt text-white text-5xl"></i>
+                <div class="project-card rounded-lg overflow-hidden">
+                    <div class="h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #006644, var(--accent));">
+                        <i class="fas fa-user-secret text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Fitness Tracking App</h3>
-                        <p class="text-gray-600 mb-4">A mobile application for tracking workouts, nutrition, and progress with social sharing features.</p>
+                        <h3 class="text-xl font-semibold mb-2 cyber-font">PRIVACY GUARD</h3>
+                        <p class="mb-4">A browser extension that protects user privacy by blocking trackers and encrypting communications.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">React Native</span>
-                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">GraphQL</span>
-                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">AWS</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">WebExtensions</span>
+                            <span class="tag text-xs px-3 py-1 rounded-full">Cryptography</span>
                         </div>
-                        <a href="#" class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
-                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        <a href="#" class="font-medium flex items-center glow-text">
+                            VIEW PROJECT <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -300,17 +247,17 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-gray-50">
+    <section id="skills" class="py-16" style="background-color: var(--card);">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">Skills & Technologies</h2>
+            <h2 class="text-3xl font-bold section-title cyber-font">TECHNICAL SKILLS</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Technical Skills</h3>
+                    <h3 class="text-xl font-semibold mb-6 cyber-font">SECURITY SKILLS</h3>
                     <div class="space-y-5">
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">JavaScript/TypeScript</span>
-                                <span class="text-gray-700 font-medium">95%</span>
+                                <span class="font-medium">Penetration Testing</span>
+                                <span class="font-medium">95%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 95%"></div>
@@ -318,8 +265,8 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">React & Vue.js</span>
-                                <span class="text-gray-700 font-medium">90%</span>
+                                <span class="font-medium">Cryptography</span>
+                                <span class="font-medium">90%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 90%"></div>
@@ -327,8 +274,8 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Node.js & Express</span>
-                                <span class="text-gray-700 font-medium">88%</span>
+                                <span class="font-medium">Network Security</span>
+                                <span class="font-medium">88%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 88%"></div>
@@ -336,8 +283,8 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Python & Django</span>
-                                <span class="text-gray-700 font-medium">85%</span>
+                                <span class="font-medium">Incident Response</span>
+                                <span class="font-medium">85%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 85%"></div>
@@ -346,30 +293,12 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Professional Skills</h3>
+                    <h3 class="text-xl font-semibold mb-6 cyber-font">DEVELOPMENT SKILLS</h3>
                     <div class="space-y-5">
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Project Management</span>
-                                <span class="text-gray-700 font-medium">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Team Leadership</span>
-                                <span class="text-gray-700 font-medium">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Problem Solving</span>
-                                <span class="text-gray-700 font-medium">92%</span>
+                                <span class="font-medium">Python</span>
+                                <span class="font-medium">92%</span>
                             </div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 92%"></div>
@@ -377,34 +306,52 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span class="text-gray-700 font-medium">Communication</span>
-                                <span class="text-gray-700 font-medium">88%</span>
+                                <span class="font-medium">JavaScript/Node.js</span>
+                                <span class="font-medium">90%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Solidity</span>
+                                <span class="font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Go</span>
+                                <span class="font-medium">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mt-12">
-                <h3 class="text-xl font-semibold text-gray-800 mb-6">Tools & Technologies</h3>
+                <h3 class="text-xl font-semibold mb-6 cyber-font">TOOLS & TECHNOLOGIES</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                        <i class="fab fa-git-alt text-3xl text-orange-500 mb-2"></i>
-                        <p class="font-medium text-gray-700">Git & GitHub</p>
+                    <div class="tool-card cyber-border">
+                        <i class="fab fa-linux text-3xl mb-2 glow-text"></i>
+                        <p class="font-medium">Kali Linux</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                        <i class="fab fa-docker text-3xl text-blue-500 mb-2"></i>
-                        <p class="font-medium text-gray-700">Docker</p>
+                    <div class="tool-card cyber-border">
+                        <i class="fas fa-network-wired text-3xl mb-2 glow-text"></i>
+                        <p class="font-medium">Wireshark</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                        <i class="fab fa-aws text-3xl text-orange-500 mb-2"></i>
-                        <p class="font-medium text-gray-700">AWS</p>
+                    <div class="tool-card cyber-border">
+                        <i class="fab fa-ethereum text-3xl mb-2 glow-text"></i>
+                        <p class="font-medium">Ethereum</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                        <i class="fas fa-database text-3xl text-green-500 mb-2"></i>
-                        <p class="font-medium text-gray-700">MySQL/MongoDB</p>
+                    <div class="tool-card cyber-border">
+                        <i class="fas fa-terminal text-3xl mb-2 glow-text"></i>
+                        <p class="font-medium">Metasploit</p>
                     </div>
                 </div>
             </div>
@@ -412,38 +359,38 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white">
+    <section id="contact" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 section-title">Get In Touch</h2>
+            <h2 class="text-3xl font-bold section-title cyber-font">GET IN TOUCH</h2>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="md:w-1/2">
-                    <p class="text-gray-600 mb-8">I'm always interested in new opportunities, whether it's a freelance project, contract work, or a full-time position. Feel free to reach out if you think we could work together!</p>
+                    <p class="mb-8">Interested in discussing security, blockchain, or development projects? I'm always open to new opportunities and collaborations.</p>
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-indigo-600"></i>
+                            <div class="p-3 rounded-full mr-4" style="background-color: rgba(0, 255, 178, 0.1);">
+                                <i class="fas fa-envelope glow-text"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-800">Email</h3>
-                                <p class="text-gray-600">john.doe@example.com</p>
+                                <h3 class="font-semibold cyber-font">ENCRYPTED EMAIL</h3>
+                                <p>alex.chen@cyber.dev</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-phone text-indigo-600"></i>
+                            <div class="p-3 rounded-full mr-4" style="background-color: rgba(0, 255, 178, 0.1);">
+                                <i class="fas fa-key glow-text"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-800">Phone</h3>
-                                <p class="text-gray-600">+1 (555) 123-4567</p>
+                                <h3 class="font-semibold cyber-font">PUBLIC KEY</h3>
+                                <p class="terminal-text text-sm">0x1a2b3c4d5e6f7890</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                            <div class="p-3 rounded-full mr-4" style="background-color: rgba(0, 255, 178, 0.1);">
+                                <i class="fas fa-map-marker-alt glow-text"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-800">Location</h3>
-                                <p class="text-gray-600">San Francisco, California</p>
+                                <h3 class="font-semibold cyber-font">LOCATION</h3>
+                                <p>San Francisco, California</p>
                             </div>
                         </div>
                     </div>
@@ -452,23 +399,23 @@
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="John Smith">
+                                <label for="name" class="block font-medium mb-2 cyber-font">YOUR NAME</label>
+                                <input type="text" id="name" class="form-input" placeholder="Enter name">
                             </div>
                             <div>
-                                <label for="email" class="block text-gray-700 font-medium mb-2">Your Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="john@example.com">
+                                <label for="email" class="block font-medium mb-2 cyber-font">YOUR EMAIL</label>
+                                <input type="email" id="email" class="form-input" placeholder="Enter email">
                             </div>
                         </div>
                         <div>
-                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
-                            <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Project Collaboration">
+                            <label for="subject" class="block font-medium mb-2 cyber-font">SUBJECT</label>
+                            <input type="text" id="subject" class="form-input" placeholder="Project discussion">
                         </div>
                         <div>
-                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Tell me about your project..."></textarea>
+                            <label for="message" class="block font-medium mb-2 cyber-font">ENCRYPTED MESSAGE</label>
+                            <textarea id="message" rows="5" class="form-input" placeholder="Type your secure message here..."></textarea>
                         </div>
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 w-full md:w-auto">Send Message</button>
+                        <button type="submit" class="btn-primary px-6 py-3 rounded-lg font-medium cyber-font w-full md:w-auto">SEND ENCRYPTED MESSAGE</button>
                     </form>
                 </div>
             </div>
@@ -476,84 +423,33 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="py-8" style="background-color: #030907;">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <h2 class="text-2xl font-bold">John Doe</h2>
-                    <p class="text-gray-400 mt-2">Full Stack Developer & UI/UX Designer</p>
+                    <h2 class="text-2xl font-bold cyber-font gradient-text">ALEX CHEN</h2>
+                    <p class="mt-2 terminal-text">CYBER SECURITY SPECIALIST</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-linkedin-in text-xl"></i>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-github text-xl"></i>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-dribbble text-xl"></i>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
+                    <a href="#" class="social-icon">
+                        <i class="fas fa-blog"></i>
                     </a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-                <p>&copy; 2023 John Doe. All rights reserved.</p>
+            <div class="border-t mt-8 pt-6 text-center" style="border-color: rgba(0, 255, 178, 0.2);">
+                <p class="terminal-text">&copy; 2023 ALEX CHEN. ALL SYSTEMS SECURE.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Simple JavaScript for navigation highlighting
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            // Remove active class from all links
-            function removeActiveClasses() {
-                navLinks.forEach(link => {
-                    link.classList.remove('active-nav', 'text-indigo-600');
-                    link.classList.add('text-gray-600');
-                });
-            }
-            
-            // Add active class to current section link
-            function setActiveLink() {
-                let fromTop = window.scrollY + 100;
-                
-                navLinks.forEach(link => {
-                    let section = document.querySelector(link.hash);
-                    
-                    if (
-                        section.offsetTop <= fromTop &&
-                        section.offsetTop + section.offsetHeight > fromTop
-                    ) {
-                        removeActiveClasses();
-                        link.classList.add('active-nav', 'text-indigo-600');
-                        link.classList.remove('text-gray-600');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', setActiveLink);
-            
-            // Animate skill bars when they come into view
-            const skillBars = document.querySelectorAll('.skill-progress');
-            
-            function animateSkillBars() {
-                skillBars.forEach(bar => {
-                    const barTop = bar.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (barTop < windowHeight - 100) {
-                        bar.style.width = bar.style.width;
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', animateSkillBars);
-            animateSkillBars(); // Run once on page load
-        });
-    </script>
+ <script src="Js files/script.js"></script>
 </body>
 </html>
