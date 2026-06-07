@@ -1,0 +1,33 @@
+/* Dark Theme - Hacker Green */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #0d1117;
+    --bg-card: #0f1419;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --neon-green: #00ff88;
+    --neon-green-dark: #00cc6a;
+    --neon-green-glow: 0 0 10px rgba(0, 255, 136, 0.5);
+    --border: #21262d;
+    --shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+    --gradient: linear-gradient(135deg, #00ff88, #00cc6a);
+}
+
+/* Light Theme */
+body.light {
+    --bg-primary: #f0fdf4;
+    --bg-secondary: #dcfce7;
+    --bg-card: #ffffff;
+    --text-primary: #052e16;
+    --text-secondary: #166534;
+    --neon-green: #00c97e;
+    --neon-green-dark: #00a86b;
+    --neon-green-glow: 0 0 10px rgba(0, 201, 126, 0.3);
+    --border: #bbf7d0;
+    --shadow: 0 0 20px rgba(0, 201, 126, 0.1);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
