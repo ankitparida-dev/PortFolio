@@ -16,11 +16,11 @@ export const skillsData = {
         skills: ['MongoDB', 'MySQL', 'Firebase']
     },
     tools: {
-        title: '🛠️ Tools & Version Control',
+        title: '🛠️ Tools',
         skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'IntelliJ IDEA']
     },
     dsa: {
-        title: '📊 Data Structures & Algorithms',
-        skills: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs', 'Recursion', 'Dynamic Programming']
+        title: '📊 DSA Topics',
+        skills: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs', 'Recursion', 'DP']
     }
 };

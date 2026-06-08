@@ -4,6 +4,7 @@ import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const [activePage, setActivePage] = useState('home');
     const { darkMode, toggleTheme } = useTheme();
 
@@ -16,9 +17,14 @@ const Navbar = () => {
     ];
 
     useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', handleScroll);
+        
         const path = window.location.pathname;
         const currentPage = path === '/' ? 'home' : path.slice(1);
         setActivePage(currentPage);
+        
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const handleClick = (path) => {
@@ -27,7 +33,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="navbar-container">
                 <a href="/" className="logo">
                     <span className="logo-text">{'>_'}</span>
@@ -44,8 +50,8 @@ const Navbar = () => {
                             {link.name}
                         </button>
                     ))}
-                    <button onClick={toggleTheme} className="theme-toggle" style={{ background: 'none', border: `1px solid var(--neon-green)`, padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer' }}>
-                        {darkMode ? <FaSun /> : <FaMoon />}
+                    <button onClick={toggleTheme} className="theme-toggle">
+                        {darkMode ? <FaSun size={16} /> : <FaMoon size={16} />}
                     </button>
                 </div>
                 <button className="mobile-menu" onClick={() => setIsOpen(!isOpen)}>

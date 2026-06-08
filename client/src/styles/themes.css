@@ -1,4 +1,4 @@
-/* Dark Theme - Hacker Green */
+/* Dark Theme - Hacker Green (Default) */
 :root {
     --bg-primary: #0a0a0a;
     --bg-secondary: #0d1117;
@@ -9,8 +9,10 @@
     --neon-green-dark: #00cc6a;
     --neon-green-glow: 0 0 10px rgba(0, 255, 136, 0.5);
     --border: #21262d;
-    --shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+    --shadow: 0 0 20px rgba(0, 255, 136, 0.15);
     --gradient: linear-gradient(135deg, #00ff88, #00cc6a);
+    --navbar-bg: rgba(10, 10, 10, 0.95);
+    --navbar-border: #00ff88;
 }
 
 /* Light Theme */
@@ -25,6 +27,8 @@ body.light {
     --neon-green-glow: 0 0 10px rgba(0, 201, 126, 0.3);
     --border: #bbf7d0;
     --shadow: 0 0 20px rgba(0, 201, 126, 0.1);
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --navbar-border: #00c97e;
 }
 
 body {

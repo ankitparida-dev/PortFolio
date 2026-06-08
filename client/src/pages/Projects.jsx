@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
 import { projectsData } from '../data/projectsData';
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
-    const [selectedProject, setSelectedProject] = useState(null);
+    const projectRefs = useRef([]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        projectRefs.current.forEach(ref => {
+            if (ref) observer.observe(ref);
+        });
+
+        return () => observer.disconnect();
+    }, []);
 
     const filteredProjects = filter === 'all' 
         ? projectsData 
@@ -19,7 +36,6 @@ const Projects = () => {
                     <span className="title-text">PROJECTS_DATABASE</span>
                 </h2>
                 
-                {/* Filter Buttons */}
                 <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '2rem', flexWrap: 'wrap' }}>
                     {categories.map(cat => (
                         <button
@@ -28,15 +44,19 @@ const Projects = () => {
                             className={filter === cat ? 'btn-primary' : 'btn-secondary'}
                             style={{ padding: '8px 20px' }}
                         >
-                            {cat === 'all' ? 'All Projects' : 'Featured Projects'}
+                            {cat === 'all' ? 'All Projects' : '⭐ Featured Projects'}
                         </button>
                     ))}
                 </div>
                 
-                {/* Projects Grid */}
                 <div className="projects-grid">
                     {filteredProjects.map((project, index) => (
-                        <div key={index} className="project-card">
+                        <div 
+                            key={index} 
+                            className="project-card"
+                            ref={el => projectRefs.current[index] = el}
+                            style={{ opacity: 0 }}
+                        >
                             <div className="project-icon" style={{ position: 'relative' }}>
                                 {project.icon}
                                 {project.featured && <FaStar style={{ position: 'absolute', top: 10, right: 10, color: '#ffd700' }} />}
@@ -50,10 +70,10 @@ const Projects = () => {
                                     ))}
                                 </div>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link" style={{ color: 'var(--neon-green)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                         <FaGithub /> Code
                                     </a>
-                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-link" style={{ color: 'var(--neon-green)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                         <FaExternalLinkAlt /> Demo
                                     </a>
                                 </div>

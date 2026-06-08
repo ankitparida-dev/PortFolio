@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaTwitter, FaInstagram } from 'react-icons/fa';
-import { socialLinks } from '../data/socialData';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [status, setStatus] = useState({ type: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (formRef.current) observer.observe(formRef.current);
+
+        return () => observer.disconnect();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,32 +53,31 @@ const Contact = () => {
                     <span className="title-text">CONTACT_PROTOCOL</span>
                 </h2>
                 
-                <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                <div ref={formRef} style={{ maxWidth: '900px', margin: '0 auto', opacity: 0 }}>
                     <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                         <p style={{ color: 'var(--text-secondary)' }}>
                             {`>_ Available for freelance work and collaboration. Send me a message!`}
                         </p>
                     </div>
                     
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                         {contactInfo.map((item, index) => (
-                            <div key={index} className="card" style={{ textAlign: 'center', padding: '1rem' }}>
+                            <div key={index} className="card" style={{ textAlign: 'center', padding: '1rem', cursor: 'pointer' }}>
                                 <div style={{ fontSize: '1.5rem', color: 'var(--neon-green)', marginBottom: '0.5rem' }}>
                                     <item.icon />
                                 </div>
-                                <h4 style={{ color: 'var(--neon-green)', fontSize: '0.8rem' }}>{item.title}</h4>
+                                <h4 style={{ color: 'var(--neon-green)', fontSize: '0.7rem' }}>{item.title}</h4>
                                 {item.link ? (
-                                    <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.9rem' }}>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.8rem' }}>
                                         {item.value}
                                     </a>
                                 ) : (
-                                    <p style={{ fontSize: '0.9rem' }}>{item.value}</p>
+                                    <p style={{ fontSize: '0.8rem' }}>{item.value}</p>
                                 )}
                             </div>
                         ))}
                     </div>
                     
-                    {/* Contact Form */}
                     <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
                         <h3 style={{ textAlign: 'center', color: 'var(--neon-green)', marginBottom: '1.5rem' }}>
                             {`>_ Send a Message`}

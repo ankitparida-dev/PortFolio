@@ -1,15 +1,19 @@
-/* Tablet */
+/* Tablet & Mobile Responsive */
 @media (max-width: 768px) {
     .container {
         padding: 0 15px;
     }
     
     section {
-        padding: 60px 0;
+        padding: 80px 0;
     }
     
     .section-title {
         font-size: 2rem;
+    }
+    
+    .typed-text {
+        font-size: 1.2rem;
     }
     
     .projects-grid {
@@ -20,13 +24,48 @@
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
     
-    .profile-container {
+    .profile-wrapper {
         width: 180px;
         height: 180px;
     }
+    
+    /* Mobile Navigation */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--navbar-bg);
+        backdrop-filter: blur(12px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        border-radius: 0 0 20px 20px;
+        border-bottom: 2px solid var(--navbar-border);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+    
+    .navbar {
+        top: 10px;
+        width: 95%;
+        border-radius: 40px;
+    }
+    
+    .navbar-container {
+        padding: 0.6rem 1.5rem;
+    }
 }
 
-/* Mobile */
+/* Mobile Small */
 @media (max-width: 480px) {
     .section-title {
         font-size: 1.5rem;
@@ -37,8 +76,44 @@
         font-size: 0.9rem;
     }
     
-    .profile-container {
+    .typed-text {
+        font-size: 1rem;
+    }
+    
+    .profile-wrapper {
         width: 150px;
         height: 150px;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+        gap: 0.8rem;
+    }
+    
+    .skill-tag {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
     }
 }
