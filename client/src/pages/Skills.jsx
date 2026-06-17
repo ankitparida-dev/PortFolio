@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { skillsData } from '../data/skillsData';
 import SkillsChart from '../components/ui/SkillsChart';
+import GitHubActivity from '../components/ui/GitHubActivity';
+import LeetCodeStats from '../components/ui/LeetCodeStats';
 
 const Skills = () => {
     const skillRefs = useRef([]);
@@ -22,18 +24,11 @@ const Skills = () => {
         return () => observer.disconnect();
     }, []);
 
-    const progressData = [
-        { name: 'Java DSA', progress: 85 },
-        { name: 'React', progress: 78 },
-        { name: 'Node.js', progress: 70 },
-        { name: 'MongoDB', progress: 60 }
-    ];
-
     return (
-        <section id="skills" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <section id="skills" style={{ backgroundColor: 'var(--bg-secondary)', minHeight: '100vh' }}>
             <div className="container">
                 <h2 className="section-title">
-                    <span className="title-text">SKILLS_MATRIX</span>
+                    <span className="title-text">SKILLS</span>
                 </h2>
                 
                 {Object.entries(skillsData).map(([key, category], catIndex) => (
@@ -41,49 +36,15 @@ const Skills = () => {
                         <h3>{category.title}</h3>
                         <div className="skills-grid">
                             {category.skills.map((skill, index) => (
-                                <div key={index} className="skill-tag">
-                                    {skill}
-                                </div>
+                                <div key={index} className="skill-tag">{skill}</div>
                             ))}
                         </div>
                     </div>
                 ))}
-                
-                {/* Learning Progress Bars */}
-                <div style={{ marginTop: '2rem' }}>
-                    <h3 style={{ textAlign: 'center', color: 'var(--neon-green)', marginBottom: '1.5rem' }}>
-                        📈 Learning Progress
-                    </h3>
-                    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-                        {progressData.map((item, index) => (
-                            <div key={index} style={{ marginBottom: '1rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                                    <span>{item.name}</span>
-                                    <span style={{ color: 'var(--neon-green)' }}>{item.progress}%</span>
-                                </div>
-                                <div style={{ background: 'var(--bg-card)', height: '10px', borderRadius: '5px', overflow: 'hidden' }}>
-                                    <div 
-                                        style={{ 
-                                            width: '0%', 
-                                            height: '100%', 
-                                            background: 'var(--gradient)', 
-                                            borderRadius: '5px',
-                                            transition: 'width 1s ease'
-                                        }}
-                                        ref={el => {
-                                            if (el && el.getBoundingClientRect().top < window.innerHeight) {
-                                                setTimeout(() => el.style.width = `${item.progress}%`, 100);
-                                            }
-                                        }}
-                                    ></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
-                {/* Interactive Charts */}
                 <SkillsChart />
+                <GitHubActivity username="ankitparida-dev" /> {/* ✅ Your GitHub username */}
+                <LeetCodeStats />
             </div>
         </section>
     );

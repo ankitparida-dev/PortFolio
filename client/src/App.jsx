@@ -8,14 +8,12 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
-// Matrix Rain Component - Only 0 and 1 binary
 const MatrixRain = () => {
     useEffect(() => {
         const container = document.createElement('div');
         container.className = 'matrix-container';
         document.body.appendChild(container);
 
-        // Only 0 and 1 characters - binary only
         const chars = '01';
         const columns = Math.floor(window.innerWidth / 25);
         
@@ -28,9 +26,7 @@ const MatrixRain = () => {
             column.style.color = `rgba(0, 255, 136, ${Math.random() * 0.3 + 0.1})`;
             
             let text = '';
-            const length = Math.floor(Math.random() * 20) + 10;
-            for (let j = 0; j < length; j++) {
-                // Random 0 or 1
+            for (let j = 0; j < 20; j++) {
                 text += chars.charAt(Math.floor(Math.random() * chars.length));
                 text += '<br>';
             }
@@ -38,9 +34,7 @@ const MatrixRain = () => {
             container.appendChild(column);
         }
 
-        return () => {
-            if (container) container.remove();
-        };
+        return () => { if (container) container.remove(); };
     }, []);
 
     return null;

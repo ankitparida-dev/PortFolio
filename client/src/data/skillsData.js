@@ -1,26 +1,26 @@
 export const skillsData = {
     programming: {
-        title: '💻 Programming Languages',
-        skills: ['Java', 'C', 'JavaScript', 'Python']
+        title: '💻 Programming',
+        skills: ['Java', 'JavaScript', 'C', 'C++', 'Python']
     },
     frontend: {
-        title: '🎨 Frontend Development',
-        skills: ['HTML5', 'CSS3', 'Tailwind CSS', 'React', 'Bootstrap']
+        title: '🎨 Frontend',
+        skills: ['HTML', 'CSS', 'Tailwind CSS', 'React']
     },
     backend: {
-        title: '⚙️ Backend Development',
-        skills: ['Node.js', 'Express.js', 'REST APIs']
+        title: '⚙️ Backend',
+        skills: ['Node.js', 'Express.js']
     },
     database: {
         title: '🗄️ Database',
-        skills: ['MongoDB', 'MySQL', 'Firebase']
+        skills: ['MongoDB']
     },
     tools: {
         title: '🛠️ Tools',
-        skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'IntelliJ IDEA']
+        skills: ['Git', 'GitHub', 'VS Code']
     },
     dsa: {
-        title: '📊 DSA Topics',
-        skills: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs', 'Recursion', 'DP']
+        title: '📊 DSA',
+        skills: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs']
     }
 };
