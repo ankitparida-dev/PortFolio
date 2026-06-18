@@ -37,7 +37,7 @@ const Navbar = () => {
             <div className="navbar-container">
                 <a href="/" className="logo">
                     <span className="logo-text">{'>_'}</span>
-                    <span className="logo-text"> ANKIT</span>
+                    <span className="logo-text"> ANKIT PARIDA</span>
                     <span className="logo-cursor">_</span>
                 </a>
                 <div className={`nav-menu ${isOpen ? 'active' : ''}`}>

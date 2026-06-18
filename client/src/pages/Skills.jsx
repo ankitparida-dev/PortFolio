@@ -42,8 +42,13 @@ const Skills = () => {
                     </div>
                 ))}
 
+                {/* DSA Progress Chart */}
                 <SkillsChart />
-                <GitHubActivity username="ankitparida-dev" /> {/* ✅ Your GitHub username */}
+
+                {/* GitHub Activity */}
+                <GitHubActivity username="ankitparida-dev" />
+
+                {/* LeetCode Stats */}
                 <LeetCodeStats />
             </div>
         </section>
