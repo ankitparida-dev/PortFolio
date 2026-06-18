@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaStar, FaCodeBranch, FaEye, FaClock, FaCode, FaUsers, FaGitCommit } from 'react-icons/fa';
+import { FaGithub, FaStar, FaCodeBranch, FaEye, FaClock, FaCode, FaUsers } from 'react-icons/fa';
+import { FiGitCommit } from 'react-icons/fi';
 
 const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
     const [repos, setRepos] = useState([]);
@@ -42,28 +43,24 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
             
             for (const repo of reposData) {
                 try {
-                    // Get commit count using the commits API
                     const commitsRes = await fetch(
                         `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`
                     );
                     
                     let commitCount = 0;
                     if (commitsRes.ok) {
-                        // Get total count from Link header
                         const linkHeader = commitsRes.headers.get('Link');
                         if (linkHeader) {
                             const match = linkHeader.match(/page=(\d+)>; rel="last"/);
                             if (match) {
                                 commitCount = parseInt(match[1]);
                             } else {
-                                // Check if there's at least one commit
                                 const data = await commitsRes.clone().json();
                                 if (Array.isArray(data) && data.length > 0) {
                                     commitCount = 1;
                                 }
                             }
                         } else {
-                            // No pagination, check if there's at least one commit
                             const data = await commitsRes.clone().json();
                             if (Array.isArray(data) && data.length > 0) {
                                 commitCount = 1;
@@ -110,7 +107,6 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
         }
     };
 
-    // Calculate total stats
     const totalStars = repos.reduce((acc, repo) => acc + repo.stargazers_count, 0);
     const totalForks = repos.reduce((acc, repo) => acc + repo.forks_count, 0);
 
@@ -119,7 +115,6 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
             <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <div className="spinner"></div>
                 <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Fetching GitHub repositories and commits...</p>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>This may take a moment</p>
             </div>
         );
     }
@@ -145,16 +140,11 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>
                     No repositories found for {username}
                 </p>
-                <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '1rem', textDecoration: 'none' }}>
-                    Visit GitHub →
-                </a>
             </div>
         );
     }
 
-    // Get repositories with commits
     const reposWithCommits = commitData.filter(repo => repo.hasCommits);
-    const reposWithoutCommits = commitData.filter(repo => !repo.hasCommits);
 
     return (
         <div style={{ marginTop: '3rem' }}>
@@ -188,7 +178,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Total Forks</div>
                     </div>
                     <div className="card" style={{ textAlign: 'center', borderColor: totalCommits > 0 ? 'var(--neon-green)' : 'var(--border)' }}>
-                        <FaGitCommit size={24} color={totalCommits > 0 ? '#00ff88' : 'var(--text-secondary)'} />
+                        <FiGitCommit size={24} color={totalCommits > 0 ? '#00ff88' : 'var(--text-secondary)'} />
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: totalCommits > 0 ? '#00ff88' : 'var(--text-secondary)' }}>
                             {totalCommits > 0 ? totalCommits : '0'}
                         </div>
@@ -197,11 +187,11 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 </div>
             )}
 
-            {/* Commit Stats by Repository - Only show if there are commits */}
+            {/* Commit Stats by Repository */}
             {reposWithCommits.length > 0 && (
                 <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
                     <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem' }}>
-                        <FaGitCommit style={{ marginRight: '8px' }} />
+                        <FiGitCommit style={{ marginRight: '8px' }} />
                         Commits by Repository ({totalCommits} total)
                     </h4>
                     {reposWithCommits.map((repo, index) => (
@@ -217,12 +207,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                                 <span style={{ color: 'var(--neon-green)' }}>📝</span>
-                                <a 
-                                    href={repo.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
-                                >
+                                <a href={repo.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     {repo.name}
                                 </a>
                                 {repo.language && (
@@ -233,17 +218,9 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                                 )}
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                                    ⭐ {repo.stars}
-                                </span>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                                    🔀 {repo.forks}
-                                </span>
-                                <span style={{ 
-                                    fontSize: '0.9rem', 
-                                    fontWeight: 'bold', 
-                                    color: 'var(--neon-green)'
-                                }}>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>⭐ {repo.stars}</span>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>🔀 {repo.forks}</span>
+                                <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--neon-green)' }}>
                                     {repo.commits} commits
                                 </span>
                             </div>
@@ -252,22 +229,9 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 </div>
             )}
 
-            {/* Message when no commits found */}
-            {reposWithCommits.length === 0 && repos.length > 0 && (
-                <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>
-                    <FaGitCommit size={30} color="var(--text-secondary)" />
-                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                        No commits found in any repository yet.
-                    </p>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                        Start committing to see your activity here!
-                    </p>
-                </div>
-            )}
-
             {/* All Repositories Grid */}
             <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem' }}>
-                📦 All Repositories ({repos.length})
+                📦 Repositories ({repos.length})
             </h4>
             <div className="projects-grid">
                 {repos.map(repo => {
@@ -304,7 +268,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                                     </span>
                                     {commitInfo && commitInfo.commits > 0 && (
                                         <span className="tech-tag" style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--neon-green)' }}>
-                                            <FaGitCommit /> {commitInfo.commits}
+                                            <FiGitCommit /> {commitInfo.commits}
                                         </span>
                                     )}
                                 </div>

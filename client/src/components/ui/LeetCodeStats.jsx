@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchLeetCodeStats } from '../../services/leetcodeService';
-import { FaCode, FaTrophy, FaFire, FaCheckCircle, FaClock, FaStar, FaAward } from 'react-icons/fa';
+import { FaCode, FaTrophy, FaFire, FaCheckCircle, FaClock, FaStar, FaChartLine } from 'react-icons/fa';
 
 const LeetCodeStats = () => {
     const [stats, setStats] = useState(null);
@@ -50,7 +50,7 @@ const LeetCodeStats = () => {
                 </span>
             </div>
 
-            {/* Stats Cards - Including Reputation & Acceptance Rate */}
+            {/* Stats Cards - Including Acceptance Rate */}
             <div style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
@@ -66,6 +66,15 @@ const LeetCodeStats = () => {
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Global Ranking</div>
                 </div>
 
+                {/* ✅ Acceptance Rate - Now Working */}
+                <div className="card" style={{ textAlign: 'center', borderColor: '#4ade80' }}>
+                    <FaCheckCircle size={28} color="#4ade80" />
+                    <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#4ade80' }}>
+                        {stats.acceptanceRate || '0'}%
+                    </div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Acceptance Rate</div>
+                </div>
+
                 {/* Reputation */}
                 <div className="card" style={{ textAlign: 'center', borderColor: '#f87171' }}>
                     <FaFire size={28} color="#f87171" />
@@ -73,15 +82,6 @@ const LeetCodeStats = () => {
                         {stats.reputation || 0}
                     </div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Reputation</div>
-                </div>
-
-                {/* Acceptance Rate */}
-                <div className="card" style={{ textAlign: 'center', borderColor: '#4ade80' }}>
-                    <FaCheckCircle size={28} color="#4ade80" />
-                    <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#4ade80' }}>
-                        {stats.acceptanceRate || '0'}%
-                    </div>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Acceptance Rate</div>
                 </div>
 
                 {/* Star Rating */}
@@ -104,18 +104,30 @@ const LeetCodeStats = () => {
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: 'var(--neon-green)' }}>{stats.totalSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Total Solved</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                        {stats.totalSubmissions} submissions
+                    </div>
                 </div>
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#4ade80' }}>{stats.easySolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Easy</div>
+                    <div style={{ fontSize: '0.7rem', color: '#4ade80' }}>
+                        {stats.easyAcceptance || '0'}% acceptance
+                    </div>
                 </div>
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#facc15' }}>{stats.mediumSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Medium</div>
+                    <div style={{ fontSize: '0.7rem', color: '#facc15' }}>
+                        {stats.mediumAcceptance || '0'}% acceptance
+                    </div>
                 </div>
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#f87171' }}>{stats.hardSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Hard</div>
+                    <div style={{ fontSize: '0.7rem', color: '#f87171' }}>
+                        {stats.hardAcceptance || '0'}% acceptance
+                    </div>
                 </div>
             </div>
 
@@ -163,34 +175,6 @@ const LeetCodeStats = () => {
                 </div>
             )}
 
-            {/* Recent Submissions */}
-            {stats.recent && stats.recent.length > 0 && (
-                <div className="card" style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ color: 'var(--neon-green)', marginBottom: '0.5rem' }}>📝 Recent Submissions</h4>
-                    {stats.recent.map((sub, i) => (
-                        <div key={i} style={{ 
-                            display: 'flex', 
-                            justifyContent: 'space-between', 
-                            padding: '0.3rem 0',
-                            borderBottom: i < stats.recent.length - 1 ? '1px solid var(--border)' : 'none',
-                            fontSize: '0.9rem'
-                        }}>
-                            <span>{sub.title}</span>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <span className="tech-tag" style={{ fontSize: '0.6rem' }}>{sub.language}</span>
-                                <span style={{ 
-                                    color: sub.status === 'Accepted' ? '#4ade80' : '#f87171',
-                                    fontSize: '0.7rem'
-                                }}>
-                                    {sub.status === 'Accepted' ? '✅' : '❌'} {sub.status}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-
-            {/* Refresh Button */}
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                 <button onClick={fetchData} className="btn-secondary" style={{ padding: '8px 20px' }}>
                     🔄 Refresh Stats

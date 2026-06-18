@@ -12,7 +12,7 @@ const Footer = () => {
                     <a href="https://instagram.com/ankitparida" target="_blank" rel="noopener noreferrer" className="social-icon"><FaInstagram size={20} /></a>
                     <a href="mailto:ankit@example.com" className="social-icon"><FaEnvelope size={20} /></a>
                 </div>
-                <p>© 2024 Ankit Parida | Built with React & ❤️</p>
+                <p>© 2026 Ankit Parida | Built with React & ❤️</p>
                 <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', color: 'var(--neon-green)' }}>
                     {`<Developer />`}
                 </p>
