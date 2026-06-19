@@ -15,6 +15,7 @@ const LeetCodeStats = () => {
 
     const fetchData = async () => {
         const data = await fetchLeetCodeStats();
+        console.log('📊 LeetCode Stats:', data); // Debug log
         setStats(data);
         setUpdateTime(new Date().toLocaleTimeString());
         setLoading(false);
@@ -50,7 +51,7 @@ const LeetCodeStats = () => {
                 </span>
             </div>
 
-            {/* Stats Cards - Including Acceptance Rate */}
+            {/* Stats Cards - Global Ranking, Acceptance Rate, Reputation, Star Rating */}
             <div style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
@@ -66,7 +67,7 @@ const LeetCodeStats = () => {
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Global Ranking</div>
                 </div>
 
-                {/* ✅ Acceptance Rate - Now Working */}
+                {/* ✅ Acceptance Rate - Now showing correctly */}
                 <div className="card" style={{ textAlign: 'center', borderColor: '#4ade80' }}>
                     <FaCheckCircle size={28} color="#4ade80" />
                     <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#4ade80' }}>
@@ -94,20 +95,26 @@ const LeetCodeStats = () => {
                 </div>
             </div>
 
-            {/* Problems Solved */}
+            {/* Problems Solved - With Submissions & Acceptance */}
             <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
                 gap: '1rem', 
                 marginBottom: '1.5rem' 
             }}>
+                {/* Total */}
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: 'var(--neon-green)' }}>{stats.totalSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Total Solved</div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
                         {stats.totalSubmissions} submissions
                     </div>
+                    <div style={{ fontSize: '0.8rem', color: '#4ade80', marginTop: '0.3rem' }}>
+                        {stats.acceptanceRate || '0'}% acceptance
+                    </div>
                 </div>
+
+                {/* Easy */}
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#4ade80' }}>{stats.easySolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Easy</div>
@@ -115,6 +122,8 @@ const LeetCodeStats = () => {
                         {stats.easyAcceptance || '0'}% acceptance
                     </div>
                 </div>
+
+                {/* Medium */}
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#facc15' }}>{stats.mediumSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Medium</div>
@@ -122,6 +131,8 @@ const LeetCodeStats = () => {
                         {stats.mediumAcceptance || '0'}% acceptance
                     </div>
                 </div>
+
+                {/* Hard */}
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#f87171' }}>{stats.hardSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Hard</div>
@@ -175,6 +186,7 @@ const LeetCodeStats = () => {
                 </div>
             )}
 
+            {/* Refresh Button */}
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                 <button onClick={fetchData} className="btn-secondary" style={{ padding: '8px 20px' }}>
                     🔄 Refresh Stats

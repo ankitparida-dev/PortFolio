@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FaGithub, FaStar, FaCodeBranch, FaEye, FaClock, FaCode, FaUsers } from 'react-icons/fa';
 import { FiGitCommit } from 'react-icons/fi';
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
     const [repos, setRepos] = useState([]);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [updateTime, setUpdateTime] = useState('');
     const [totalCommits, setTotalCommits] = useState(0);
     const [commitData, setCommitData] = useState([]);
@@ -21,52 +25,44 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
         try {
             setLoading(true);
             setError(false);
+            setErrorMessage('');
             
-            // Fetch profile
-            const profileRes = await fetch(`https://api.github.com/users/${username}`);
-            if (profileRes.ok) {
-                const profileData = await profileRes.json();
-                setProfile(profileData);
-            }
+            // Fetch profile via backend proxy
+            const profileRes = await axios.get(`${API_URL}/github/user/${username}`);
+            setProfile(profileRes.data);
 
-            // Fetch ALL repos
-            const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100&type=all`);
-            let reposData = [];
-            if (reposRes.ok) {
-                reposData = await reposRes.json();
-                setRepos(Array.isArray(reposData) ? reposData : []);
+            // ✅ Fetch ONLY public repositories (not forked, not private)
+            const reposRes = await axios.get(`${API_URL}/github/repos/${username}`);
+            const allRepos = reposRes.data;
+            
+            // ✅ Filter: Only public, non-forked repositories
+            const publicRepos = allRepos.filter(repo => 
+                repo.private === false && 
+                repo.fork === false
+            );
+            
+            if (!Array.isArray(publicRepos) || publicRepos.length === 0) {
+                setRepos([]);
+                setCommitData([]);
+                setTotalCommits(0);
+                setLoading(false);
+                setError(true);
+                setErrorMessage('No public repositories found.');
+                return;
             }
+            
+            setRepos(publicRepos);
 
             // Fetch commit count for each repository
             let totalCommitCount = 0;
             const repoCommitData = [];
             
-            for (const repo of reposData) {
+            for (const repo of publicRepos) {
                 try {
-                    const commitsRes = await fetch(
-                        `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`
+                    const commitRes = await axios.get(
+                        `${API_URL}/github/commits/${username}/${encodeURIComponent(repo.name)}`
                     );
-                    
-                    let commitCount = 0;
-                    if (commitsRes.ok) {
-                        const linkHeader = commitsRes.headers.get('Link');
-                        if (linkHeader) {
-                            const match = linkHeader.match(/page=(\d+)>; rel="last"/);
-                            if (match) {
-                                commitCount = parseInt(match[1]);
-                            } else {
-                                const data = await commitsRes.clone().json();
-                                if (Array.isArray(data) && data.length > 0) {
-                                    commitCount = 1;
-                                }
-                            }
-                        } else {
-                            const data = await commitsRes.clone().json();
-                            if (Array.isArray(data) && data.length > 0) {
-                                commitCount = 1;
-                            }
-                        }
-                    }
+                    const commitCount = commitRes.data.commits || 0;
                     
                     totalCommitCount += commitCount;
                     repoCommitData.push({
@@ -78,7 +74,10 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                         watchers: repo.watchers_count,
                         updated: repo.updated_at,
                         url: repo.html_url,
-                        hasCommits: commitCount > 0
+                        hasCommits: commitCount > 0,
+                        description: repo.description,
+                        isPublic: true,
+                        isFork: false
                     });
                 } catch (e) {
                     console.log(`Could not fetch commits for ${repo.name}`);
@@ -91,7 +90,10 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                         watchers: repo.watchers_count,
                         updated: repo.updated_at,
                         url: repo.html_url,
-                        hasCommits: false
+                        hasCommits: false,
+                        description: repo.description,
+                        isPublic: true,
+                        isFork: false
                     });
                 }
             }
@@ -103,6 +105,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
         } catch (err) {
             console.error('GitHub Error:', err);
             setError(true);
+            setErrorMessage(err.response?.data?.message || err.message || 'Failed to fetch GitHub data');
             setLoading(false);
         }
     };
@@ -114,7 +117,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
         return (
             <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <div className="spinner"></div>
-                <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Fetching GitHub repositories and commits...</p>
+                <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Fetching GitHub repositories...</p>
             </div>
         );
     }
@@ -124,7 +127,7 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
             <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <FaGithub size={40} style={{ color: 'var(--neon-green)' }} />
                 <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>
-                    Unable to fetch GitHub data. Please try again later.
+                    {errorMessage || 'Unable to fetch GitHub data'}
                 </p>
                 <button onClick={fetchData} className="btn-secondary" style={{ marginTop: '1rem', padding: '8px 20px' }}>
                     🔄 Retry
@@ -138,8 +141,11 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
             <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <FaGithub size={40} style={{ color: 'var(--neon-green)' }} />
                 <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>
-                    No repositories found for {username}
+                    No public repositories found for {username}
                 </p>
+                <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '1rem', textDecoration: 'none' }}>
+                    Visit GitHub →
+                </a>
             </div>
         );
     }
@@ -159,7 +165,6 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 </span>
             </div>
 
-            {/* Profile Stats Cards */}
             {profile && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div className="card" style={{ textAlign: 'center' }}>
@@ -187,7 +192,6 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 </div>
             )}
 
-            {/* Commit Stats by Repository */}
             {reposWithCommits.length > 0 && (
                 <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
                     <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem' }}>
@@ -229,9 +233,8 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 </div>
             )}
 
-            {/* All Repositories Grid */}
             <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem' }}>
-                📦 Repositories ({repos.length})
+                📦 Public Repositories ({repos.length})
             </h4>
             <div className="projects-grid">
                 {repos.map(repo => {
@@ -282,7 +285,6 @@ const GitHubActivity = ({ username = 'ankitparida-dev' }) => {
                 })}
             </div>
 
-            {/* Refresh Button */}
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                 <button onClick={fetchData} className="btn-secondary" style={{ padding: '8px 24px' }}>
                     🔄 Refresh

@@ -18,13 +18,11 @@ const SkillsChart = () => {
         fetchData();
         const interval = setInterval(fetchData, 300000);
         
-        // Check theme on mount and when it changes
         const checkTheme = () => {
             setIsDark(!document.body.classList.contains('light'));
         };
         checkTheme();
         
-        // Observe theme changes
         const observer = new MutationObserver(checkTheme);
         observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
         
@@ -35,19 +33,24 @@ const SkillsChart = () => {
     }, []);
 
     const fetchData = async () => {
-        const data = await fetchLeetCodeStats();
-        setStats(data);
-        setUpdateTime(new Date().toLocaleTimeString());
-        setLoading(false);
+        try {
+            const data = await fetchLeetCodeStats();
+            console.log('📊 LeetCode Stats Data:', data);
+            setStats(data);
+            setUpdateTime(new Date().toLocaleTimeString());
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching LeetCode stats:', error);
+            setLoading(false);
+        }
     };
 
-    // Get theme-aware colors
     const getTextColor = () => isDark ? '#e6edf3' : '#052e16';
     const getSecondaryTextColor = () => isDark ? '#8b949e' : '#166534';
     const getGridColor = () => isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
     const getCardBg = () => isDark ? '#0f1419' : '#ffffff';
 
-    if (loading || !stats) {
+    if (loading) {
         return (
             <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <div className="spinner"></div>
@@ -56,12 +59,22 @@ const SkillsChart = () => {
         );
     }
 
-    // Calculate DSA topic progress based on LeetCode stats
+    if (!stats) {
+        return (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
+                <p style={{ color: 'var(--text-secondary)' }}>No data available</p>
+            </div>
+        );
+    }
+
+    // ✅ EXTRACT ALL VALUES - These are now numbers, not arrays
     const totalSolved = stats.totalSolved || 0;
     const easySolved = stats.easySolved || 0;
     const mediumSolved = stats.mediumSolved || 0;
     const hardSolved = stats.hardSolved || 0;
+    const totalSubmissions = stats.totalSubmissions || 0;
 
+    // DSA Topic Distribution
     const dsaTopics = {
         arrays: Math.round((easySolved * 0.25) + (mediumSolved * 0.15) + (hardSolved * 0.05)),
         strings: Math.round((easySolved * 0.20) + (mediumSolved * 0.12) + (hardSolved * 0.05)),
@@ -73,7 +86,7 @@ const SkillsChart = () => {
         dp: Math.round((easySolved * 0.05) + (mediumSolved * 0.10) + (hardSolved * 0.20))
     };
 
-    // 1. Doughnut Chart - Problem Distribution
+    // Doughnut Chart
     const doughnutData = {
         labels: [`Easy (${easySolved})`, `Medium (${mediumSolved})`, `Hard (${hardSolved})`],
         datasets: [{
@@ -105,10 +118,10 @@ const SkillsChart = () => {
                 borderWidth: 1,
                 callbacks: {
                     label: function(context) {
-                        let label = context.label || '';
-                        let value = context.parsed || 0;
-                        let total = context.dataset.data.reduce((a, b) => a + b, 0);
-                        let percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                        const label = context.label || '';
+                        const value = context.parsed || 0;
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
                         return `${label}: ${value} problems (${percentage}%)`;
                     }
                 }
@@ -116,7 +129,7 @@ const SkillsChart = () => {
         }
     };
 
-    // 2. Bar Chart - DSA Topic-wise Progress
+    // Bar Chart
     const barData = {
         labels: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs', 'DP'],
         datasets: [{
@@ -152,9 +165,7 @@ const SkillsChart = () => {
         responsive: true,
         maintainAspectRatio: true,
         plugins: {
-            legend: {
-                display: false
-            },
+            legend: { display: false },
             tooltip: {
                 backgroundColor: getCardBg(),
                 titleColor: '#00ff88',
@@ -190,7 +201,7 @@ const SkillsChart = () => {
         }
     };
 
-    // 3. Radar Chart - DSA Skill Matrix
+    // Radar Chart
     const radarData = {
         labels: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs', 'DP'],
         datasets: [{
@@ -265,7 +276,6 @@ const SkillsChart = () => {
                 </span>
             </div>
             
-            {/* Stats Summary */}
             <div style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
@@ -275,6 +285,9 @@ const SkillsChart = () => {
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: 'var(--neon-green)' }}>{totalSolved}</div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Total Solved</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                        {totalSubmissions} submissions
+                    </div>
                 </div>
                 <div className="card" style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', color: '#4ade80' }}>{easySolved}</div>
@@ -290,14 +303,12 @@ const SkillsChart = () => {
                 </div>
             </div>
 
-            {/* Charts Grid */}
             <div style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
                 gap: '2rem',
                 marginBottom: '2rem'
             }}>
-                {/* Doughnut Chart - Problem Distribution */}
                 <div className="card" style={{ padding: '1.5rem' }}>
                     <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', textAlign: 'center' }}>
                         🎯 Problem Distribution
@@ -307,7 +318,6 @@ const SkillsChart = () => {
                     </div>
                 </div>
 
-                {/* Radar Chart - DSA Skill Matrix */}
                 <div className="card" style={{ padding: '1.5rem' }}>
                     <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', textAlign: 'center' }}>
                         🔍 DSA Skill Matrix
@@ -315,13 +325,9 @@ const SkillsChart = () => {
                     <div style={{ height: '300px' }}>
                         <Radar data={radarData} options={radarOptions} />
                     </div>
-                    <p style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                        Shows proficiency percentage per topic
-                    </p>
                 </div>
             </div>
 
-            {/* Bar Chart - Full Width */}
             <div className="card" style={{ padding: '1.5rem' }}>
                 <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', textAlign: 'center' }}>
                     📈 DSA Topic-wise Progress
@@ -329,12 +335,8 @@ const SkillsChart = () => {
                 <div style={{ height: '350px' }}>
                     <Bar data={barData} options={barOptions} />
                 </div>
-                <p style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    Hover on bars for details | Updates automatically when you solve problems
-                </p>
             </div>
 
-            {/* Refresh Button */}
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                 <button onClick={fetchData} className="btn-secondary" style={{ padding: '8px 20px' }}>
                     🔄 Refresh Stats

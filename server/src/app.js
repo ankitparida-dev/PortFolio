@@ -3,54 +3,29 @@ const cors = require('cors');
 require('dotenv').config();
 
 const contactRoutes = require('./routes/contactRoutes');
-const githubRoutes = require('./routes/githubRoutes'); // ADD THIS
-const errorHandler = require('./middleware/errorHandler');
+const githubRoutes = require('./routes/githubRoutes');
 
 const app = express();
 
-// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// CORS
+// Updated CORS to allow all origins during development
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    credentials: true
+    origin: ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Routes
 app.use('/api/contact', contactRoutes);
-app.use('/api/github', githubRoutes); // ADD THIS
+app.use('/api/github', githubRoutes);
 
-// Health check
 app.get('/api/health', (req, res) => {
-    res.json({ 
-        status: 'OK', 
-        message: 'Portfolio API is running',
-        timestamp: new Date().toISOString()
-    });
+    res.json({ status: 'OK', message: 'Portfolio API is running' });
 });
 
-// Home route
 app.get('/', (req, res) => {
-    res.json({ 
-        message: 'Welcome to Portfolio API',
-        endpoints: {
-            health: '/api/health',
-            contact: {
-                submit: 'POST /api/contact',
-                getAll: 'GET /api/contact'
-            },
-            github: {
-                user: 'GET /api/github/user/:username',
-                repos: 'GET /api/github/repos/:username',
-                commits: 'GET /api/github/commits/:username/:repo'
-            }
-        }
-    });
+    res.json({ message: 'Portfolio API is running!' });
 });
-
-// Error handler
-app.use(errorHandler);
 
 module.exports = app;

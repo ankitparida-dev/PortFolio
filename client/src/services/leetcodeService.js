@@ -44,56 +44,50 @@ export const fetchLeetCodeStats = async () => {
         const data = await response.json();
         
         if (data.errors || !data.data?.matchedUser) {
+            console.error('GraphQL Errors:', data.errors);
             return getFallbackData();
         }
 
         const user = data.data.matchedUser;
         const submissions = user.submitStats?.acSubmissionNum || [];
         
-        // Get total submissions and accepted
+        // Get stats for each difficulty
         const allStats = submissions.find(s => s.difficulty === 'All');
-        const totalSubmissions = allStats?.submissions || 0;
-        const totalSolved = allStats?.count || 0;
-        
-        // ✅ Calculate acceptance rate
-        // Acceptance Rate = (Total Accepted Problems / Total Submissions) * 100
-        let acceptanceRate = 0;
-        if (totalSubmissions > 0) {
-            acceptanceRate = (totalSolved / totalSubmissions) * 100;
-        }
-
-        // For individual difficulties
         const easyStats = submissions.find(s => s.difficulty === 'Easy');
         const mediumStats = submissions.find(s => s.difficulty === 'Medium');
         const hardStats = submissions.find(s => s.difficulty === 'Hard');
-
-        // Calculate difficulty-wise acceptance rates
-        const easyAcceptance = easyStats?.submissions > 0 
-            ? (easyStats.count / easyStats.submissions) * 100 
-            : 0;
-        const mediumAcceptance = mediumStats?.submissions > 0 
-            ? (mediumStats.count / mediumStats.submissions) * 100 
-            : 0;
-        const hardAcceptance = hardStats?.submissions > 0 
-            ? (hardStats.count / hardStats.submissions) * 100 
-            : 0;
+        
+        // ✅ Calculate acceptance rates
+        // Acceptance Rate = (Accepted / Total Submissions) * 100
+        const calculateRate = (accepted, submissions) => {
+            if (!submissions || submissions === 0) return 0;
+            return (accepted / submissions) * 100;
+        };
+        
+        const totalAccepted = allStats?.count || 0;
+        const totalSubmissions = allStats?.submissions || 0;
+        const easyAccepted = easyStats?.count || 0;
+        const easySubmissions = easyStats?.submissions || 0;
+        const mediumAccepted = mediumStats?.count || 0;
+        const mediumSubmissions = mediumStats?.submissions || 0;
+        const hardAccepted = hardStats?.count || 0;
+        const hardSubmissions = hardStats?.submissions || 0;
         
         return {
             username: user.username,
-            totalSolved: totalSolved,
-            easySolved: easyStats?.count || 0,
-            mediumSolved: mediumStats?.count || 0,
-            hardSolved: hardStats?.count || 0,
+            totalSolved: totalAccepted,
+            easySolved: easyAccepted,
+            mediumSolved: mediumAccepted,
+            hardSolved: hardAccepted,
             totalSubmissions: totalSubmissions,
-            // ✅ Acceptance rates
-            acceptanceRate: acceptanceRate.toFixed(1),
-            easyAcceptance: easyAcceptance.toFixed(1),
-            mediumAcceptance: mediumAcceptance.toFixed(1),
-            hardAcceptance: hardAcceptance.toFixed(1),
-            // ✅ Add submission counts for each difficulty
-            easySubmissions: easyStats?.submissions || 0,
-            mediumSubmissions: mediumStats?.submissions || 0,
-            hardSubmissions: hardStats?.submissions || 0,
+            easySubmissions: easySubmissions,
+            mediumSubmissions: mediumSubmissions,
+            hardSubmissions: hardSubmissions,
+            // ✅ Acceptance rates (as percentage strings)
+            acceptanceRate: calculateRate(totalAccepted, totalSubmissions).toFixed(1),
+            easyAcceptance: calculateRate(easyAccepted, easySubmissions).toFixed(1),
+            mediumAcceptance: calculateRate(mediumAccepted, mediumSubmissions).toFixed(1),
+            hardAcceptance: calculateRate(hardAccepted, hardSubmissions).toFixed(1),
             ranking: user.profile?.ranking || 'N/A',
             reputation: user.profile?.reputation || 0,
             starRating: user.profile?.starRating || 0,
@@ -120,14 +114,14 @@ const getFallbackData = () => ({
     mediumSolved: 23,
     hardSolved: 3,
     totalSubmissions: 631,
-    // ✅ Fallback acceptance rates
+    easySubmissions: 122,
+    mediumSubmissions: 30,
+    hardSubmissions: 5,
+    // ✅ Fallback acceptance rates (from your actual stats)
     acceptanceRate: '84.6',
     easyAcceptance: '85.2',
     mediumAcceptance: '76.7',
     hardAcceptance: '60.0',
-    easySubmissions: 122,
-    mediumSubmissions: 30,
-    hardSubmissions: 5,
     ranking: '1,235,598',
     reputation: 0,
     starRating: 0,

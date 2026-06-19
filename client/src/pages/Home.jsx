@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaProjectDiagram, FaClock } from 'react-icons/fa';
+import { FaCode, FaProjectDiagram, FaClock } from 'react-icons/fa';
 import { fetchLeetCodeStats } from '../services/leetcodeService';
+import SocialLinks from '../components/common/SocialLinks';
 import profileImg from '../assets/images/profile.jpg';
 
 const Home = () => {
@@ -53,36 +54,27 @@ const Home = () => {
             try {
                 setLoading(true);
                 
-                // Fetch LeetCode stats
                 const leetcodeData = await fetchLeetCodeStats();
                 
-                // Fetch GitHub repos count
                 const githubRes = await fetch('https://api.github.com/users/ankitparida-dev/repos?per_page=100');
                 const githubData = await githubRes.json();
                 
-                // Calculate total projects (repos count)
                 const totalProjects = Array.isArray(githubData) ? githubData.length : 0;
-                
-                // Calculate problems solved from LeetCode
                 const problemsSolved = leetcodeData?.totalSolved || 0;
                 
-                // ✅ CORRECTED: Calculate coding hours using submissions
-                // Get total submissions from LeetCode
+                // Calculate coding hours (approximately 2 minutes per submission)
                 const totalSubmissions = leetcodeData?.totalSubmissions || 0;
-                
-                // Estimate: ~2 minutes per submission (includes thinking, debugging, testing)
                 const codingHours = totalSubmissions > 0 ? Math.round((totalSubmissions * 2) / 60) : 0;
                 
                 setStats({
                     problemsSolved: problemsSolved,
                     projectsCompleted: totalProjects,
-                    codingHours: codingHours || 30 // Fallback to 30+ if no data
+                    codingHours: codingHours || 30
                 });
                 
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching stats:', error);
-                // Fallback stats
                 setStats({
                     problemsSolved: 130,
                     projectsCompleted: 8,
@@ -158,11 +150,25 @@ const Home = () => {
                         ))}
                     </div>
                     
-                    {/* Social Links */}
-                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                        <a href="https://github.com/ankitparida-dev" className="social-icon" target="_blank" rel="noopener noreferrer"><FaGithub size={20} /></a>
-                        <a href="https://linkedin.com/in/ankitparida" className="social-icon" target="_blank" rel="noopener noreferrer"><FaLinkedin size={20} /></a>
-                        <a href="mailto:ankit@example.com" className="social-icon"><FaEnvelope size={20} /></a>
+                    {/* ✅ Social Links - Larger and more visible */}
+                    <div style={{ 
+                        marginTop: '2.5rem',
+                        padding: '2rem',
+                        background: 'var(--bg-card)',
+                        borderRadius: '16px',
+                        border: '1px solid var(--neon-green)',
+                        boxShadow: 'var(--shadow)'
+                    }}>
+                        <h3 style={{ 
+                            textAlign: 'center', 
+                            color: 'var(--neon-green)', 
+                            marginBottom: '1.5rem',
+                            fontFamily: 'monospace',
+                            fontSize: '1.3rem'
+                        }}>
+                            {`>_ Connect With Me`}
+                        </h3>
+                        <SocialLinks showLabels={true} />
                     </div>
                 </div>
             </div>
