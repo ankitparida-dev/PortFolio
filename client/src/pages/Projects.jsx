@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaStar, FaServer } from 'react-icons/fa';
 import { projectsData } from '../data/projectsData';
 
 const Projects = () => {
@@ -40,17 +40,37 @@ const Projects = () => {
                 <div className="projects-grid">
                     {filteredProjects.map((project, index) => (
                         <div key={project.id || index} className="project-card">
-                            <div className="project-icon" style={{ position: 'relative' }}>
-                                {project.icon}
-                                {project.featured && (
-                                    <FaStar style={{ 
-                                        position: 'absolute', 
-                                        top: 10, 
-                                        right: 10, 
-                                        color: '#ffd700' 
-                                    }} />
-                                )}
-                            </div>
+                            {/* ✅ Show image if exists, otherwise show icon */}
+                            {project.image ? (
+                                <div className="project-image-container" style={{
+                                    width: '100%',
+                                    height: '200px',
+                                    overflow: 'hidden',
+                                    backgroundColor: 'var(--bg-secondary)'
+                                }}>
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover'
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <div className="project-icon" style={{ position: 'relative', height: '160px' }}>
+                                    {project.icon}
+                                    {project.featured && (
+                                        <FaStar style={{ 
+                                            position: 'absolute', 
+                                            top: 10, 
+                                            right: 10, 
+                                            color: '#ffd700' 
+                                        }} />
+                                    )}
+                                </div>
+                            )}
                             <div className="project-content">
                                 <h3 style={{ color: 'var(--neon-green)', marginBottom: '0.5rem' }}>
                                     {project.title}
@@ -101,6 +121,23 @@ const Projects = () => {
                                             }}
                                         >
                                             <FaExternalLinkAlt /> Demo
+                                        </a>
+                                    )}
+                                    {project.render && project.render !== '#' && (
+                                        <a 
+                                            href={project.render} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="project-link"
+                                            style={{ 
+                                                color: 'var(--neon-green)', 
+                                                textDecoration: 'none', 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                gap: '0.5rem' 
+                                            }}
+                                        >
+                                            <FaServer /> Render
                                         </a>
                                     )}
                                 </div>
