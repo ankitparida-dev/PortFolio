@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FaGraduationCap, FaBullseye, FaHeart, FaRocket } from 'react-icons/fa';
-import ProgressRing from '../components/ui/ProgressRing';
+import { FaGraduationCap, FaBullseye, FaHeart, FaRocket, FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const About = () => {
     const cardsRef = useRef([]);
@@ -25,30 +24,80 @@ const About = () => {
     }, []);
 
     const sections = [
-        { icon: FaGraduationCap, title: 'Education', color: '#00ff88',
-          content: (
-            <>
-                <p><strong>B.Tech in Computer Science Engineering</strong></p>
-                <p>CGPA: 8.5/10 | Expected Graduation: 2025</p>
-                <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
-                    Relevant Coursework: Data Structures, Algorithms, Web Development, Database Management
+        { 
+            icon: FaGraduationCap, 
+            title: 'Education', 
+            color: '#00ff88',
+            content: (
+                <>
+                    <p><strong>Chitkara University</strong></p>
+                    <p><strong>B.E. in Computer Science and Engineering</strong></p>
+                    <p style={{ color: 'var(--neon-green)', fontWeight: 'bold' }}>
+                        CGPA: 9.10 / 10.00
+                    </p>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+                        July 2024 — Present
+                    </p>
+                    <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
+                        <strong>Relevant Coursework:</strong> Data Structures & Algorithms (OOP Focus), Database Management Systems (DBMS), Backend & API Engineering, Computer Networks, Operating Systems Foundations
+                    </p>
+                </>
+            )
+        },
+        { 
+            icon: FaBullseye, 
+            title: 'Summary', 
+            color: '#00ff88',
+            content: (
+                <p style={{ fontSize: '1.05rem', lineHeight: '1.8' }}>
+                    Computer Science and Engineering student with a <strong style={{ color: 'var(--neon-green)' }}>9.10 CGPA</strong> and hands-on expertise building full-stack applications using the MERN stack. Proven ability to write clean backend logic and engineer scalable software solutions to solve complex challenges.
                 </p>
-            </>
-          )},
-        { icon: FaBullseye, title: 'Career Objective', color: '#00ff88',
-          content: (
-            <p>Passionate Computer Science student learning Java, Data Structures & Algorithms, and Full Stack Development. 
-            Building scalable web applications and strengthening problem-solving skills for software engineering roles.</p>
-          )},
-        { icon: FaHeart, title: 'What Drives Me', color: '#00ff88',
-          content: (
-            <p>I love solving complex problems through code. Whether it's optimizing algorithms or building user-friendly applications, 
-            I'm always eager to learn and grow. Technology is my passion, and I believe in using it to make a positive impact.</p>
-          )}
+            )
+        },
+        { 
+            icon: FaHeart, 
+            title: 'What Drives Me', 
+            color: '#00ff88',
+            content: (
+                <>
+                    <p>I love solving complex problems through code. Whether it's optimizing algorithms or building user-friendly applications, I'm always eager to learn and grow.</p>
+                    <div style={{ marginTop: '1rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+                        <span className="skill-tag">Clear Communication</span>
+                        <span className="skill-tag">Team Collaboration</span>
+                        <span className="skill-tag">Fast Learner</span>
+                        <span className="skill-tag">Analytical Problem Solving</span>
+                    </div>
+                </>
+            )
+        },
+        { 
+            icon: FaRocket, 
+            title: 'Contact & Connect', 
+            color: '#00ff88',
+            content: (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.8rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                        <FaPhone color="var(--neon-green)" /> +91 8146990416
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                        <FaEnvelope color="var(--neon-green)" /> ankitparida386@gmail.com
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                        <FaMapMarkerAlt color="var(--neon-green)" /> Panchkula, India
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                        <FaLinkedin color="var(--neon-green)" /> <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida087</a>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                        <FaGithub color="var(--neon-green)" /> <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida-dev</a>
+                    </div>
+                </div>
+            )
+        }
     ];
 
     return (
-        <section id="about">
+        <section id="about" style={{ minHeight: '100vh', padding: '80px 0' }}>
             <div className="container">
                 <h2 className="section-title">
                     <span className="title-text">ABOUT_ME</span>
@@ -67,23 +116,6 @@ const About = () => {
                             {section.content}
                         </div>
                     ))}
-                    
-                    {/* Progress Rings */}
-                    <div className="card" style={{ textAlign: 'center', opacity: 0 }} ref={el => cardsRef.current[3] = el}>
-                        <FaRocket size={40} color="#00ff88" style={{ marginBottom: '1rem' }} />
-                        <h3 style={{ color: 'var(--neon-green)', marginBottom: '1.5rem' }}>Current Progress</h3>
-                        <div style={{ 
-                            display: 'grid', 
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-                            gap: '2rem',
-                            justifyContent: 'center'
-                        }}>
-                            <ProgressRing value={85} label="Java DSA" />
-                            <ProgressRing value={78} label="React" />
-                            <ProgressRing value={70} label="Node.js" />
-                            <ProgressRing value={65} label="System Design" />
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

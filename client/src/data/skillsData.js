@@ -1,26 +1,26 @@
 export const skillsData = {
     programming: {
-        title: '💻 Programming',
-        skills: ['Java', 'JavaScript', 'C', 'C++', 'Python']
-    },
-    frontend: {
-        title: '🎨 Frontend',
-        skills: ['HTML', 'CSS', 'Tailwind CSS', 'React']
+        title: '💻 Programming Languages',
+        skills: ['JavaScript (ES6+)', 'Java (DSA Focus)', 'HTML5', 'CSS3']
     },
     backend: {
-        title: '⚙️ Backend',
-        skills: ['Node.js', 'Express.js']
+        title: '⚙️ Backend & Storage',
+        skills: ['Node.js', 'Express.js', 'MongoDB + Mongoose', 'PostgreSQL + Prisma ORM', 'RESTful APIs', 'Postman']
     },
-    database: {
-        title: '🗄️ Database',
-        skills: ['MongoDB']
+    frontend: {
+        title: '🎨 Frontend Tools',
+        skills: ['React.js', 'Axios', 'Chart.js / Recharts']
     },
     tools: {
-        title: '🛠️ Tools',
-        skills: ['Git', 'GitHub', 'VS Code']
+        title: '🛠️ Developer Ecosystem',
+        skills: ['Git', 'GitHub', 'Vercel', 'Render', 'Socket.io', 'Jest + Supertest']
     },
-    dsa: {
-        title: '📊 DSA',
-        skills: ['Arrays', 'Strings', 'Linked Lists', 'Stacks', 'Queues', 'Trees', 'Graphs']
+    softSkills: {
+        title: '🤝 Soft Skills',
+        skills: ['Clear Communication', 'Team Collaboration', 'Fast Learner', 'Analytical Problem Solving']
+    },
+    interests: {
+        title: '🏏 Interests & Languages',
+        skills: ['Cricket Enthusiast', 'Mobile E-sports', 'Hindi (Native)', 'English (Professional)']
     }
 };
