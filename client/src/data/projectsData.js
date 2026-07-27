@@ -1,4 +1,5 @@
 import MovieMateThumbnail from '../assets/images/moviemate-thumbnail.jpg';
+import StopWatchThumbnail from '../assets/images/stopwatch.png';
 
 export const projectsData = [
     {
@@ -13,19 +14,20 @@ export const projectsData = [
         demo: 'https://movie-mate-seven-nu.vercel.app',
         render: 'https://moviemate-l4ts.onrender.com',
         featured: true,
-        year: 2026
+        year: 2024
     },
     {
         id: 2,
         title: 'Stopwatch',
         icon: '⏱️',
-        description: 'A fully functional stopwatch application with start, stop, reset, and lap timing features.',
-        fullDescription: 'Stopwatch is a precise timing application with lap tracking, perfect for sports, workouts, and time management.',
-        technologies: ['JavaScript', 'HTML', 'CSS'],
+        image: StopWatchThumbnail,
+        description: 'A fully functional terminal-style stopwatch application with start, pause, lap tracking, and reset features. Built with a clean, modern interface.',
+        fullDescription: 'Stopwatch is a precise timing application with lap tracking, keyboard shortcuts (Space, L, R), and a terminal-style interface. Perfect for sports, workouts, and time management.',
+        technologies: ['JavaScript', 'HTML', 'CSS', 'React'],
         github: 'https://github.com/ankitparida-dev/Stopwatch',
-        demo: '#',
+        demo: 'https://stopwatch-rho-orcin.vercel.app',
         featured: false,
-        year: 2026
+        year: 2024
     },
     {
         id: 3,
@@ -37,6 +39,6 @@ export const projectsData = [
         github: 'https://github.com/ankitparida-dev/Todo_App',
         demo: '#',
         featured: false,
-        year: 2026
+        year: 2024
     }
 ];
