@@ -1,5 +1,6 @@
 import MovieMateThumbnail from '../assets/images/moviemate-thumbnail.jpg';
 import StopWatchThumbnail from '../assets/images/stopwatch.png';
+import TodoAppThumbnail from '../assets/images/todoapp.png'
 
 export const projectsData = [
     {
@@ -30,14 +31,15 @@ export const projectsData = [
         year: 2024
     },
     {
-        id: 3,
+       id: 3,
         title: 'Todo_App',
         icon: '✅',
-        description: 'A simple and efficient todo list application with add, delete, and mark-complete features.',
-        fullDescription: 'Todo_App is a clean and intuitive task management application for organizing daily activities and priorities.',
-        technologies: ['JavaScript', 'HTML', 'CSS'],
+        image: TodoAppThumbnail,
+        description: 'A feature-rich task manager application with task categories (Personal, Work, Shopping, Health), priority levels (High, Medium, Low), and progress tracking.',
+        fullDescription: 'Task Manager Pro is a comprehensive todo application that helps users organize tasks with categories, priority levels, and real-time progress tracking. Features include task filtering (All, Active, Completed), search functionality, and task statistics.',
+        technologies: ['React', 'JavaScript', 'CSS'],
         github: 'https://github.com/ankitparida-dev/Todo_App',
-        demo: '#',
+        demo: 'https://todo-app-jade-delta.vercel.app',
         featured: false,
         year: 2024
     }

@@ -17,10 +17,20 @@ export const skillsData = {
     },
     softSkills: {
         title: '🤝 Soft Skills',
-        skills: ['Clear Communication', 'Team Collaboration', 'Fast Learner', 'Analytical Problem Solving']
+        skills: [
+            'Clear Communication',
+            'Team Collaboration',
+            'Fast Learner',
+            'Analytical Problem Solving'
+        ]
     },
     interests: {
         title: '🏏 Interests & Languages',
-        skills: ['Cricket Enthusiast', 'Mobile E-sports', 'Hindi (Native)', 'English (Professional)']
+        skills: [
+            'Cricket Enthusiast',
+            'Mobile E-sports',
+            'Hindi (Native)',
+            'English (Professional)'
+        ]
     }
 };

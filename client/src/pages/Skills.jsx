@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FaGithub, FaCode, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
+import { FaGithub, FaCode, FaExternalLinkAlt } from 'react-icons/fa';
 import { skillsData } from '../data/skillsData';
 
 const Skills = () => {
@@ -96,7 +96,7 @@ const Skills = () => {
                         <FaCode size={50} color="var(--neon-green)" style={{ marginBottom: '1rem' }} />
                         <h3 style={{ color: 'var(--neon-green)', marginBottom: '0.5rem' }}>LeetCode</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>
-                            Check out my DSA problem-solving journey and coding challenges.
+                            Check out my DSA problem-solving journey.
                         </p>
                         <a 
                             href="https://leetcode.com/u/Ankit087-acer/" 
@@ -152,7 +152,7 @@ const Skills = () => {
                                 fontSize: '0.7rem',
                                 fontWeight: 'bold'
                             }}>
-                                130+ Solved
+                                150+ Solved
                             </span>
                             <FaExternalLinkAlt size={12} color="var(--text-secondary)" />
                         </div>

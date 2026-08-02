@@ -1,9 +1,23 @@
 const Contact = require('../models/Contact');
+const nodemailer = require('nodemailer');
 
+// ✅ Configure email transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+// @desc    Submit contact form
+// @route   POST /api/contact
+// @access  Public
 const submitContact = async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
         
+        // Validate
         if (!name || !email || !message) {
             return res.status(400).json({
                 success: false,
@@ -11,6 +25,12 @@ const submitContact = async (req, res) => {
             });
         }
         
+        // ✅ If no subject, create one from first few words of message
+        const emailSubject = subject && subject.trim() !== '' 
+            ? subject 
+            : message.split(' ').slice(0, 6).join(' ') + '...';
+        
+        // ✅ Save to MongoDB
         const contact = await Contact.create({
             name,
             email,
@@ -18,15 +38,96 @@ const submitContact = async (req, res) => {
             message
         });
         
-        console.log('📩 New message from:', name);
+        console.log(`📩 New message from: ${name} (${email})`);
+        console.log(`📝 Subject: ${emailSubject}`);
+        console.log(`📝 Message: ${message.substring(0, 50)}...`);
+        
+        // ✅ Send email notification
+        try {
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: process.env.EMAIL_USER,
+                subject: `📩 New Portfolio Message from ${name}`,
+                html: `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+                            .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                            .header { text-align: center; border-bottom: 3px solid #2ec4b6; padding-bottom: 20px; }
+                            .header h1 { color: #2ec4b6; margin: 0; font-size: 24px; }
+                            .content { padding: 20px 0; }
+                            .field { margin-bottom: 15px; }
+                            .field-label { font-weight: bold; color: #333; display: block; margin-bottom: 5px; }
+                            .field-value { color: #555; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; }
+                            .message-box { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2ec4b6; margin-top: 5px; }
+                            .footer { text-align: center; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 12px; }
+                            .badge { display: inline-block; background: #2ec4b6; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; }
+                            .status-new { background: #ff6b6b; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; margin-left: 5px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <h1>📩 New Portfolio Message</h1>
+                                <p style="color: #888; margin: 5px 0 0;">You have received a new message from your portfolio</p>
+                                <span class="status-new">🔴 NEW</span>
+                            </div>
+                            <div class="content">
+                                <div class="field">
+                                    <span class="field-label">👤 Name</span>
+                                    <div class="field-value">${name}</div>
+                                </div>
+                                <div class="field">
+                                    <span class="field-label">📧 Email</span>
+                                    <div class="field-value">
+                                        <a href="mailto:${email}" style="color: #2ec4b6; text-decoration: none;">${email}</a>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <span class="field-label">📝 Subject</span>
+                                    <div class="field-value" style="font-weight: bold; color: #2ec4b6;">
+                                        ${emailSubject}
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <span class="field-label">💬 Message</span>
+                                    <div class="message-box">${message.replace(/\n/g, '<br>')}</div>
+                                </div>
+                                <div style="margin-top: 20px; text-align: center;">
+                                    <span class="badge">📅 ${new Date().toLocaleString()}</span>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <p>This message was sent from your portfolio contact form.</p>
+                                <p style="margin-top: 5px;">
+                                    <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/contact" style="color: #2ec4b6;">Visit Portfolio</a>
+                                    &nbsp;|&nbsp;
+                                    <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/admin" style="color: #2ec4b6;">View All Messages</a>
+                                </p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                `
+            };
+            
+            const info = await transporter.sendMail(mailOptions);
+            console.log(`✅ Email notification sent: ${info.messageId}`);
+            
+        } catch (emailError) {
+            console.error('❌ Email error:', emailError.message);
+            // Don't fail the request if email fails
+        }
         
         res.status(201).json({
             success: true,
-            message: 'Message sent successfully!',
-            data: contact
+            message: 'Message sent successfully! I\'ll get back to you soon.'
         });
+        
     } catch (error) {
-        console.error('Contact error:', error);
+        console.error('❌ Contact error:', error);
         res.status(500).json({
             success: false,
             message: 'Server error. Please try again.'
@@ -34,11 +135,15 @@ const submitContact = async (req, res) => {
     }
 };
 
+// @desc    Get all contacts
+// @route   GET /api/contact
+// @access  Private (Admin only)
 const getContacts = async (req, res) => {
     try {
         const contacts = await Contact.find().sort({ createdAt: -1 });
         res.status(200).json({
             success: true,
+            count: contacts.length,
             data: contacts
         });
     } catch (error) {
@@ -49,6 +154,9 @@ const getContacts = async (req, res) => {
     }
 };
 
+// @desc    Get single contact
+// @route   GET /api/contact/:id
+// @access  Private (Admin only)
 const getContactById = async (req, res) => {
     try {
         const contact = await Contact.findById(req.params.id);
@@ -70,6 +178,9 @@ const getContactById = async (req, res) => {
     }
 };
 
+// @desc    Delete contact
+// @route   DELETE /api/contact/:id
+// @access  Private (Admin only)
 const deleteContact = async (req, res) => {
     try {
         const contact = await Contact.findByIdAndDelete(req.params.id);
@@ -91,9 +202,38 @@ const deleteContact = async (req, res) => {
     }
 };
 
+// @desc    Mark contact as read
+// @route   PUT /api/contact/:id/read
+// @access  Private (Admin only)
+const markAsRead = async (req, res) => {
+    try {
+        const contact = await Contact.findByIdAndUpdate(
+            req.params.id,
+            { read: true },
+            { new: true }
+        );
+        if (!contact) {
+            return res.status(404).json({
+                success: false,
+                message: 'Contact not found'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            data: contact
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     submitContact,
     getContacts,
     getContactById,
-    deleteContact
+    deleteContact,
+    markAsRead
 };
