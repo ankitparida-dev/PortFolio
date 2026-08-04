@@ -45,8 +45,10 @@ const submitContact = async (req, res) => {
         // ✅ Send email notification
         try {
             const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: process.env.EMAIL_USER,
+                // ✅ IMPORTANT: From = You, To = You, ReplyTo = User
+                from: process.env.EMAIL_USER,        // Your email (sender)
+                to: process.env.EMAIL_USER,          // Your email (recipient)
+                replyTo: email,                      // ✅ When you reply, it goes to the user!
                 subject: `📩 New Portfolio Message from ${name}`,
                 html: `
                     <!DOCTYPE html>
@@ -65,13 +67,21 @@ const submitContact = async (req, res) => {
                             .footer { text-align: center; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 12px; }
                             .badge { display: inline-block; background: #2ec4b6; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; }
                             .status-new { background: #ff6b6b; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; margin-left: 5px; }
+                            .reply-info { 
+                                background: #f0fdf4; 
+                                padding: 12px 15px; 
+                                border-radius: 8px; 
+                                border: 1px solid #2ec4b6; 
+                                margin: 15px 0;
+                                text-align: center;
+                            }
                         </style>
                     </head>
                     <body>
                         <div class="container">
                             <div class="header">
                                 <h1>📩 New Portfolio Message</h1>
-                                <p style="color: #888; margin: 5px 0 0;">You have received a new message from your portfolio</p>
+                                <p style="color: #888; margin: 5px 0 0;">From: ${name}</p>
                                 <span class="status-new">🔴 NEW</span>
                             </div>
                             <div class="content">
@@ -95,6 +105,12 @@ const submitContact = async (req, res) => {
                                     <span class="field-label">💬 Message</span>
                                     <div class="message-box">${message.replace(/\n/g, '<br>')}</div>
                                 </div>
+                                <div class="reply-info">
+                                    <strong>📌 Reply to: <a href="mailto:${email}" style="color: #2ec4b6;">${email}</a></strong>
+                                    <p style="margin: 5px 0 0; font-size: 12px; color: #666;">
+                                        ℹ️ Click "Reply" and it will go directly to ${name}
+                                    </p>
+                                </div>
                                 <div style="margin-top: 20px; text-align: center;">
                                     <span class="badge">📅 ${new Date().toLocaleString()}</span>
                                 </div>
@@ -115,6 +131,7 @@ const submitContact = async (req, res) => {
             
             const info = await transporter.sendMail(mailOptions);
             console.log(`✅ Email notification sent: ${info.messageId}`);
+            console.log(`📧 Reply to: ${email}`);
             
         } catch (emailError) {
             console.error('❌ Email error:', emailError.message);
