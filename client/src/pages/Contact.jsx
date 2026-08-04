@@ -42,42 +42,76 @@ const Contact = () => {
                         </p>
                     </div>
                     
-                    {/* Contact Info Cards */}
+                    {/* Contact Info Cards - Fixed Email Visibility */}
                     <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
                         gap: '1rem',
                         marginBottom: '2rem'
                     }}>
-                        <div className="card" style={{ textAlign: 'center', padding: '1rem' }}>
+                        {/* Email Card - Fixed */}
+                        <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaEnvelope size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>Email</h4>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                                ankitparida386@gmail.com
+                            <p style={{ 
+                                color: 'var(--text-primary)', // ✅ Uses theme text color
+                                fontSize: '0.8rem',
+                                wordBreak: 'break-all',
+                                background: 'var(--bg-primary)',
+                                padding: '6px 10px',
+                                borderRadius: '6px',
+                                marginTop: '4px'
+                            }}>
+                                <a 
+                                    href="mailto:ankitparida386@gmail.com" 
+                                    style={{ 
+                                        color: 'var(--text-primary)', // ✅ Changed from neon-green to text-primary
+                                        textDecoration: 'none'
+                                    }}
+                                >
+                                    ankitparida386@gmail.com
+                                </a>
                             </p>
                         </div>
-                        <div className="card" style={{ textAlign: 'center', padding: '1rem' }}>
+
+                        {/* GitHub Card */}
+                        <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaGithub size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>GitHub</h4>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                                <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none' }}>
+                            <p style={{ 
+                                color: 'var(--text-primary)', 
+                                fontSize: '0.8rem',
+                                wordBreak: 'break-all'
+                            }}>
+                                <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     ankitparida-dev
                                 </a>
                             </p>
                         </div>
-                        <div className="card" style={{ textAlign: 'center', padding: '1rem' }}>
+
+                        {/* LinkedIn Card */}
+                        <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaLinkedin size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>LinkedIn</h4>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                                <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none' }}>
+                            <p style={{ 
+                                color: 'var(--text-primary)', 
+                                fontSize: '0.8rem',
+                                wordBreak: 'break-all'
+                            }}>
+                                <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     ankitparida087
                                 </a>
                             </p>
                         </div>
-                        <div className="card" style={{ textAlign: 'center', padding: '1rem' }}>
+
+                        {/* Location Card */}
+                        <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaMapMarkerAlt size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>Location</h4>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                            <p style={{ 
+                                color: 'var(--text-primary)', 
+                                fontSize: '0.85rem'
+                            }}>
                                 Panchkula, India
                             </p>
                         </div>
@@ -124,7 +158,6 @@ const Contact = () => {
                                     required 
                                 />
                             </div>
-                            {/* ✅ Subject Field Added */}
                             <div className="form-group">
                                 <label>{'>_ SUBJECT:'}</label>
                                 <input 

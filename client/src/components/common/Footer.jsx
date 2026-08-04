@@ -26,7 +26,7 @@ const Footer = () => {
                     borderTop: '1px solid var(--border)'
                 }}>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        © 2026 Ankit Parida | Built with React & ❤️
+                        © 2026 Ankit Parida | Built with MERN & ❤️
                     </p>
                     <p style={{ 
                         fontSize: '0.8rem', 

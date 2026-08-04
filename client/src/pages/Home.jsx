@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaStar, FaFileDownload } from 'react-icons/fa';
 import SocialLinks from '../components/common/SocialLinks';
 import profileImg from '../assets/images/image2.png';
 
@@ -11,7 +11,6 @@ const Home = () => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // ✅ Updated phrases
     const phrases = [
         'Full Stack Developer',
         'MERN Stack Developer',
@@ -108,6 +107,15 @@ const Home = () => {
                     </p>
                     
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap' }}>
+                        {/* ✅ Resume Download Button */}
+                        <a 
+                            href="/resume.pdf" 
+                            download 
+                            className="btn-primary"
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                        >
+                            <FaFileDownload /> Download Resume
+                        </a>
                         <a href="/contact" className="btn-primary">{'>_'} Get In Touch</a>
                         <a href="/projects" className="btn-secondary">{'>_'} View All Projects</a>
                         <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" className="btn-secondary">

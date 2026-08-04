@@ -32,9 +32,6 @@ const About = () => {
                 <>
                     <p><strong>Chitkara University</strong></p>
                     <p><strong>B.E. in Computer Science and Engineering</strong></p>
-                    <p style={{ color: 'var(--neon-green)', fontWeight: 'bold' }}>
-                        CGPA: 9.10 / 10.00
-                    </p>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
                         July 2024 — Present
                     </p>
@@ -50,7 +47,7 @@ const About = () => {
             color: '#00ff88',
             content: (
                 <p style={{ fontSize: '1.05rem', lineHeight: '1.8' }}>
-                    Computer Science and Engineering student with a <strong style={{ color: 'var(--neon-green)' }}>9.10 CGPA</strong> and hands-on expertise building full-stack applications using the MERN stack. Proven ability to write clean backend logic and engineer scalable software solutions to solve complex challenges.
+                    Computer Science and Engineering student with hands-on expertise building full-stack applications using the MERN stack. Proven ability to write clean backend logic and engineer scalable software solutions to solve complex challenges.
                 </p>
             )
         },
@@ -86,10 +83,12 @@ const About = () => {
                         <FaMapMarkerAlt color="var(--neon-green)" /> Panchkula, India
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaLinkedin color="var(--neon-green)" /> <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida087</a>
+                        <FaLinkedin color="var(--neon-green)" /> 
+                        <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida087</a>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaGithub color="var(--neon-green)" /> <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida-dev</a>
+                        <FaGithub color="var(--neon-green)" /> 
+                        <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida-dev</a>
                     </div>
                 </div>
             )
