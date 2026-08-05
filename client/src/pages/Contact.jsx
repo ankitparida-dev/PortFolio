@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 import SocialLinks from '../components/common/SocialLinks';
 import { submitContact } from '../services/api';
 
@@ -42,30 +42,27 @@ const Contact = () => {
                         </p>
                     </div>
                     
-                    {/* Contact Info Cards - Fixed Email Visibility */}
+                    {/* Contact Info Cards */}
                     <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
                         gap: '1rem',
                         marginBottom: '2rem'
                     }}>
-                        {/* Email Card - Fixed */}
+                        {/* Email Card - Fixed (No black background) */}
                         <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaEnvelope size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>Email</h4>
                             <p style={{ 
-                                color: 'var(--text-primary)', // ✅ Uses theme text color
+                                color: 'var(--text-primary)',
                                 fontSize: '0.8rem',
                                 wordBreak: 'break-all',
-                                background: 'var(--bg-primary)',
-                                padding: '6px 10px',
-                                borderRadius: '6px',
                                 marginTop: '4px'
                             }}>
                                 <a 
                                     href="mailto:ankitparida386@gmail.com" 
                                     style={{ 
-                                        color: 'var(--text-primary)', // ✅ Changed from neon-green to text-primary
+                                        color: 'var(--text-primary)',
                                         textDecoration: 'none'
                                     }}
                                 >

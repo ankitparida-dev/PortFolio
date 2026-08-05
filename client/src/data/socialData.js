@@ -17,16 +17,9 @@ export const socialLinks = [
         username: 'ankitparida087',
         color: '#0a66c2'
     },
+
     {
         id: 3,
-        name: 'Email',
-        icon: FaEnvelope,
-        url: 'mailto:ankitparida386@gmail.com',
-        username: 'ankitparida386@gmail.com',
-        color: '#ea4335'
-    },
-    {
-        id: 4,
         name: 'Instagram',
         icon: FaInstagram,
         url: 'https://www.instagram.com/ankitparida087/',
@@ -34,7 +27,7 @@ export const socialLinks = [
         color: '#e4405f'
     },
     {
-        id: 5,
+        id: 4,
         name: 'Twitter / X',
         icon: FaTwitter,
         url: 'https://x.com/ParidaAnki7567',
