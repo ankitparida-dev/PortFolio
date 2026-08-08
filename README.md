@@ -60,5 +60,5 @@ A modern, interactive portfolio website built with the MERN stack featuring a cy
 | Render | Backend Hosting |
 | MongoDB Atlas | Database Hosting |
 
----
+--- 
 
