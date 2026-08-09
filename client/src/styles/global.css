@@ -205,3 +205,123 @@ section {
     padding: 0.5rem;
     border-radius: 8px;
 }
+/* ============================================================
+   NAVBAR RESPONSIVE STYLES
+   ============================================================ */
+
+/* Desktop Default */
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* Tablet & Mobile */
+@media (max-width: 768px) {
+    .navbar {
+        top: 10px !important;
+        width: 95% !important;
+        border-radius: 40px !important;
+    }
+    
+    .navbar-container {
+        padding: 0.6rem 1.5rem !important;
+    }
+    
+    .logo {
+        font-size: 1.1rem !important;
+    }
+    
+    .mobile-menu {
+        display: block !important;
+    }
+    
+    .nav-menu {
+        position: fixed !important;
+        left: -100% !important;
+        top: 70px !important;
+        flex-direction: column !important;
+        background: var(--navbar-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        width: 100% !important;
+        text-align: center !important;
+        transition: 0.3s ease-in-out !important;
+        padding: 2rem 0 !important;
+        gap: 1.5rem !important;
+        border-bottom: 2px solid var(--navbar-border) !important;
+        max-height: calc(100vh - 70px) !important;
+        overflow-y: auto !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .nav-menu.active {
+        left: 0 !important;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem !important;
+        padding: 0.8rem 0 !important;
+        width: 80% !important;
+        margin: 0 auto !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .nav-link:hover {
+        background: rgba(0, 255, 136, 0.05) !important;
+    }
+    
+    .nav-link.active {
+        background: rgba(0, 255, 136, 0.1) !important;
+    }
+    
+    .theme-toggle {
+        margin-top: 0.5rem !important;
+        padding: 0.6rem 2rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .navbar {
+        top: 8px !important;
+        width: 96% !important;
+    }
+    
+    .navbar-container {
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .logo {
+        font-size: 0.9rem !important;
+    }
+    
+    .nav-menu {
+        top: 60px !important;
+        padding: 1.5rem 0 !important;
+        gap: 1rem !important;
+        max-height: calc(100vh - 60px) !important;
+    }
+    
+    .nav-link {
+        font-size: 1rem !important;
+        padding: 0.6rem 0 !important;
+        width: 90% !important;
+    }
+    
+    .theme-toggle {
+        padding: 0.5rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Keyframes for cursor blink */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
