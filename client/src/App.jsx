@@ -7,6 +7,7 @@ import About from './pages/About';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin'; // ✅ Add this import
 
 const MatrixRain = () => {
     useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
             case '/skills': return <Skills />;
             case '/projects': return <Projects />;
             case '/contact': return <Contact />;
+            case '/admin': return <Admin />; // ✅ Add admin route
             default: return <Home />;
         }
     };

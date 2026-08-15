@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 import SocialLinks from '../components/common/SocialLinks';
 import { submitContact } from '../services/api';
@@ -7,6 +7,7 @@ const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [status, setStatus] = useState({ type: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const isSubmitting = useRef(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,17 +15,35 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (isSubmitting.current || loading) {
+            return;
+        }
+        
+        isSubmitting.current = true;
         setLoading(true);
+        setStatus({ type: '', message: '' });
         
         try {
+            console.log('📤 Sending message...');
             await submitContact(formData);
-            setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
+            
+            setStatus({ 
+                type: 'success', 
+                message: '✅ Message sent successfully! I\'ll get back to you soon.' 
+            });
             setFormData({ name: '', email: '', subject: '', message: '' });
         } catch (error) {
-            console.error('Error sending message:', error);
-            setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+            console.error('❌ Error:', error);
+            setStatus({ 
+                type: 'error', 
+                message: '❌ Failed to send. Please try again.' 
+            });
         } finally {
             setLoading(false);
+            setTimeout(() => {
+                isSubmitting.current = false;
+            }, 1500);
         }
     };
 
@@ -38,7 +57,7 @@ const Contact = () => {
                 <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                     <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            {`>_ Let's connect! Reach out to me through any of the platforms below.`}
+                            {`>_ Let's connect!`}
                         </p>
                     </div>
                     
@@ -49,72 +68,42 @@ const Contact = () => {
                         gap: '1rem',
                         marginBottom: '2rem'
                     }}>
-                        {/* Email Card - Fixed (No black background) */}
                         <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaEnvelope size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>Email</h4>
-                            <p style={{ 
-                                color: 'var(--text-primary)',
-                                fontSize: '0.8rem',
-                                wordBreak: 'break-all',
-                                marginTop: '4px'
-                            }}>
-                                <a 
-                                    href="mailto:ankitparida386@gmail.com" 
-                                    style={{ 
-                                        color: 'var(--text-primary)',
-                                        textDecoration: 'none'
-                                    }}
-                                >
+                            <p style={{ color: 'var(--text-primary)', fontSize: '0.8rem', wordBreak: 'break-all' }}>
+                                <a href="mailto:ankitparida386@gmail.com" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     ankitparida386@gmail.com
                                 </a>
                             </p>
                         </div>
-
-                        {/* GitHub Card */}
                         <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaGithub size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>GitHub</h4>
-                            <p style={{ 
-                                color: 'var(--text-primary)', 
-                                fontSize: '0.8rem',
-                                wordBreak: 'break-all'
-                            }}>
+                            <p style={{ color: 'var(--text-primary)', fontSize: '0.8rem', wordBreak: 'break-all' }}>
                                 <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     ankitparida-dev
                                 </a>
                             </p>
                         </div>
-
-                        {/* LinkedIn Card */}
                         <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaLinkedin size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>LinkedIn</h4>
-                            <p style={{ 
-                                color: 'var(--text-primary)', 
-                                fontSize: '0.8rem',
-                                wordBreak: 'break-all'
-                            }}>
+                            <p style={{ color: 'var(--text-primary)', fontSize: '0.8rem', wordBreak: 'break-all' }}>
                                 <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>
                                     ankitparida087
                                 </a>
                             </p>
                         </div>
-
-                        {/* Location Card */}
                         <div className="card" style={{ textAlign: 'center', padding: '1.2rem' }}>
                             <FaMapMarkerAlt size={24} color="var(--neon-green)" />
                             <h4 style={{ color: 'var(--neon-green)', marginTop: '0.5rem' }}>Location</h4>
-                            <p style={{ 
-                                color: 'var(--text-primary)', 
-                                fontSize: '0.85rem'
-                            }}>
+                            <p style={{ color: 'var(--text-primary)', fontSize: '0.85rem' }}>
                                 Panchkula, India
                             </p>
                         </div>
                     </div>
                     
-                    {/* Social Links Section */}
                     <div style={{ marginBottom: '2rem' }}>
                         <h3 style={{ textAlign: 'center', color: 'var(--neon-green)', marginBottom: '1rem' }}>
                             Connect With Me
@@ -142,6 +131,7 @@ const Contact = () => {
                                     onChange={handleChange} 
                                     placeholder="Enter your name" 
                                     required 
+                                    disabled={loading}
                                 />
                             </div>
                             <div className="form-group">
@@ -153,6 +143,7 @@ const Contact = () => {
                                     onChange={handleChange} 
                                     placeholder="Enter your email" 
                                     required 
+                                    disabled={loading}
                                 />
                             </div>
                             <div className="form-group">
@@ -163,6 +154,7 @@ const Contact = () => {
                                     value={formData.subject} 
                                     onChange={handleChange} 
                                     placeholder="Enter subject (optional)" 
+                                    disabled={loading}
                                 />
                             </div>
                             <div className="form-group">
@@ -174,6 +166,7 @@ const Contact = () => {
                                     onChange={handleChange} 
                                     placeholder="Type your message here..." 
                                     required
+                                    disabled={loading}
                                 />
                             </div>
                             <button type="submit" className="btn-primary" disabled={loading}>

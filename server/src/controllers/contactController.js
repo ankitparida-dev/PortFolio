@@ -1,33 +1,28 @@
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
 
-// ✅ Configure email transporter with timeout settings
+// ✅ Configure email transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    // ✅ Add these to fix timeout
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000,
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
     tls: {
         rejectUnauthorized: false
     }
 });
 
-// @desc    Submit contact form
-// @route   POST /api/contact
-// @access  Public
+// ✅ Submit contact form - INSTANT RESPONSE
 const submitContact = async (req, res) => {
     try {
         console.log('📩 New message from:', req.body.name || 'Unknown');
-        console.log('📧 Email:', req.body.email);
         
         const { name, email, subject, message } = req.body;
         
-        // Validate
         if (!name || !email || !message) {
             return res.status(400).json({
                 success: false,
@@ -35,12 +30,7 @@ const submitContact = async (req, res) => {
             });
         }
         
-        // ✅ If no subject, create one from first few words of message
-        const emailSubject = subject && subject.trim() !== '' 
-            ? subject 
-            : message.split(' ').slice(0, 6).join(' ') + '...';
-        
-        // ✅ Save to MongoDB
+        // ✅ Save to MongoDB (fast)
         const contact = await Contact.create({
             name,
             email,
@@ -49,116 +39,59 @@ const submitContact = async (req, res) => {
         });
         
         console.log(`✅ Saved to MongoDB, ID: ${contact._id}`);
-        console.log(`📝 Subject: ${emailSubject}`);
-        console.log(`📝 Message: ${message.substring(0, 50)}...`);
         
-        // ✅ Send email notification
-        try {
-            console.log('📧 Sending email notification...');
-            
-            const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: process.env.EMAIL_USER,
-                replyTo: email,
-                subject: `📩 New Portfolio Message from ${name}`,
-                html: `
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <style>
-                            body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-                            .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-                            .header { text-align: center; border-bottom: 3px solid #2ec4b6; padding-bottom: 20px; }
-                            .header h1 { color: #2ec4b6; margin: 0; font-size: 24px; }
-                            .content { padding: 20px 0; }
-                            .field { margin-bottom: 15px; }
-                            .field-label { font-weight: bold; color: #333; display: block; margin-bottom: 5px; }
-                            .field-value { color: #555; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; }
-                            .message-box { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2ec4b6; margin-top: 5px; }
-                            .footer { text-align: center; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 12px; }
-                            .badge { display: inline-block; background: #2ec4b6; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; }
-                            .status-new { background: #ff6b6b; color: white; padding: 2px 10px; border-radius: 20px; font-size: 12px; margin-left: 5px; }
-                            .reply-info { 
-                                background: #f0fdf4; 
-                                padding: 12px 15px; 
-                                border-radius: 8px; 
-                                border: 1px solid #2ec4b6; 
-                                margin: 15px 0;
-                                text-align: center;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <div class="header">
-                                <h1>📩 New Portfolio Message</h1>
-                                <p style="color: #888; margin: 5px 0 0;">From: ${name}</p>
-                                <span class="status-new">🔴 NEW</span>
-                            </div>
-                            <div class="content">
-                                <div class="field">
-                                    <span class="field-label">👤 Name</span>
-                                    <div class="field-value">${name}</div>
-                                </div>
-                                <div class="field">
-                                    <span class="field-label">📧 Email</span>
-                                    <div class="field-value">
-                                        <a href="mailto:${email}" style="color: #2ec4b6; text-decoration: none;">${email}</a>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <span class="field-label">📝 Subject</span>
-                                    <div class="field-value" style="font-weight: bold; color: #2ec4b6;">
-                                        ${emailSubject}
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <span class="field-label">💬 Message</span>
-                                    <div class="message-box">${message.replace(/\n/g, '<br>')}</div>
-                                </div>
-                                <div class="reply-info">
-                                    <strong>📌 Reply to: <a href="mailto:${email}" style="color: #2ec4b6;">${email}</a></strong>
-                                    <p style="margin: 5px 0 0; font-size: 12px; color: #666;">
-                                        ℹ️ Click "Reply" and it will go directly to ${name}
-                                    </p>
-                                </div>
-                                <div style="margin-top: 20px; text-align: center;">
-                                    <span class="badge">📅 ${new Date().toLocaleString()}</span>
-                                </div>
-                            </div>
-                            <div class="footer">
-                                <p>This message was sent from your portfolio contact form.</p>
-                                <p style="margin-top: 5px;">
-                                    <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/contact" style="color: #2ec4b6;">Visit Portfolio</a>
-                                </p>
-                            </div>
-                        </div>
-                    </body>
-                    </html>
-                `
-            };
-            
-            const info = await transporter.sendMail(mailOptions);
-            console.log(`✅ Email sent successfully!`);
-            console.log(`📧 Message ID: ${info.messageId}`);
-            console.log(`📧 Reply to: ${email}`);
-            
-        } catch (emailError) {
-            console.error('❌ Email error:', emailError.message);
-            // Don't fail the request if email fails
-        }
+        // ✅ Send email in background WITHOUT await
+        // This runs parallel and doesn't block the response
+        sendEmailInBackground(name, email, subject, message);
         
-        res.status(201).json({
+        // ✅ Send INSTANT response to user
+        return res.status(201).json({
             success: true,
             message: 'Message sent successfully! I\'ll get back to you soon.'
         });
         
     } catch (error) {
         console.error('❌ Contact error:', error);
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: 'Server error. Please try again.'
         });
+    }
+};
+
+// ✅ Email function runs in background - DOESN'T BLOCK
+const sendEmailInBackground = async (name, email, subject, message) => {
+    try {
+        console.log('📧 Sending email in background...');
+        
+        const emailSubject = subject && subject.trim() !== '' 
+            ? subject 
+            : message.split(' ').slice(0, 6).join(' ') + '...';
+        
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            replyTo: email,
+            subject: `📩 New Portfolio Message from ${name}`,
+            html: `
+                <h2>📩 New Message from Portfolio</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                <p><strong>Subject:</strong> ${emailSubject}</p>
+                <p><strong>Message:</strong></p>
+                <p style="background: #f5f5f5; padding: 15px; border-radius: 8px;">${message}</p>
+                <hr>
+                <p style="color: #888; font-size: 0.8rem;">
+                    Sent on: ${new Date().toLocaleString()}
+                </p>
+            `
+        };
+        
+        await transporter.sendMail(mailOptions);
+        console.log('✅ Email sent successfully!');
+        
+    } catch (error) {
+        console.error('❌ Email error:', error.message);
     }
 };
 

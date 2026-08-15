@@ -13,7 +13,7 @@ const Navbar = () => {
         { name: 'About', path: '/about' },
         { name: 'Skills', path: '/skills' },
         { name: 'Projects', path: '/projects' },
-        { name: 'Contact', path: '/contact' }
+        { name: 'Contact', path: '/contact' },
     ];
 
     useEffect(() => {
@@ -99,7 +99,7 @@ const Navbar = () => {
                         WebkitBackgroundClip: 'text',
                         backgroundClip: 'text',
                         color: 'transparent',
-                    }}> ANKIT</span>
+                    }}> Ankit Parida</span>
                     <span className="logo-cursor" style={{
                         animation: 'blink 1s infinite',
                         color: 'var(--neon-green)',
