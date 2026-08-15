@@ -1,12 +1,19 @@
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
 
-// ✅ Configure email transporter
+// ✅ Configure email transporter with timeout settings
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    // ✅ Add these to fix timeout
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
@@ -15,6 +22,9 @@ const transporter = nodemailer.createTransport({
 // @access  Public
 const submitContact = async (req, res) => {
     try {
+        console.log('📩 New message from:', req.body.name || 'Unknown');
+        console.log('📧 Email:', req.body.email);
+        
         const { name, email, subject, message } = req.body;
         
         // Validate
@@ -38,17 +48,18 @@ const submitContact = async (req, res) => {
             message
         });
         
-        console.log(`📩 New message from: ${name} (${email})`);
+        console.log(`✅ Saved to MongoDB, ID: ${contact._id}`);
         console.log(`📝 Subject: ${emailSubject}`);
         console.log(`📝 Message: ${message.substring(0, 50)}...`);
         
         // ✅ Send email notification
         try {
+            console.log('📧 Sending email notification...');
+            
             const mailOptions = {
-                // ✅ IMPORTANT: From = You, To = You, ReplyTo = User
-                from: process.env.EMAIL_USER,        // Your email (sender)
-                to: process.env.EMAIL_USER,          // Your email (recipient)
-                replyTo: email,                      // ✅ When you reply, it goes to the user!
+                from: process.env.EMAIL_USER,
+                to: process.env.EMAIL_USER,
+                replyTo: email,
                 subject: `📩 New Portfolio Message from ${name}`,
                 html: `
                     <!DOCTYPE html>
@@ -119,8 +130,6 @@ const submitContact = async (req, res) => {
                                 <p>This message was sent from your portfolio contact form.</p>
                                 <p style="margin-top: 5px;">
                                     <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/contact" style="color: #2ec4b6;">Visit Portfolio</a>
-                                    &nbsp;|&nbsp;
-                                    <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/admin" style="color: #2ec4b6;">View All Messages</a>
                                 </p>
                             </div>
                         </div>
@@ -130,7 +139,8 @@ const submitContact = async (req, res) => {
             };
             
             const info = await transporter.sendMail(mailOptions);
-            console.log(`✅ Email notification sent: ${info.messageId}`);
+            console.log(`✅ Email sent successfully!`);
+            console.log(`📧 Message ID: ${info.messageId}`);
             console.log(`📧 Reply to: ${email}`);
             
         } catch (emailError) {

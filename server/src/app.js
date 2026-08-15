@@ -9,26 +9,9 @@ const app = express();
 
 app.use(express.json());
 
-// ✅ CORS configuration for Render
-const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://127.0.0.1:5173',
-    process.env.FRONTEND_URL,
-    'https://your-portfolio.vercel.app'  // Replace with your actual URL
-];
-
+// ✅ CORS - Allow all origins for production
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
-            callback(null, true);
-        } else {
-            console.log('❌ CORS blocked for:', origin);
-            callback(null, true); // Allow all in production
-        }
-    },
-    credentials: true,
+    origin: '*',  // ✅ Allow all origins (temporary fix for production)
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
