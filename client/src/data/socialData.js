@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram, FaTwitter, FaCode } from 'react-icons/fa';
 
 export const socialLinks = [
     {
@@ -6,7 +6,7 @@ export const socialLinks = [
         name: 'GitHub',
         icon: FaGithub,
         url: 'https://github.com/ankitparida-dev',
-        username: '@ankitparida-dev',
+        username: 'ankitparida-dev',
         color: '#ffffff'
     },
     {
@@ -17,9 +17,16 @@ export const socialLinks = [
         username: 'ankitparida087',
         color: '#0a66c2'
     },
-
     {
         id: 3,
+        name: 'Email',
+        icon: FaEnvelope,
+        url: 'mailto:ankitparida386@gmail.com',
+        username: 'ankitparida386@gmail.com',
+        color: '#ea4335'
+    },
+    {
+        id: 4,
         name: 'Instagram',
         icon: FaInstagram,
         url: 'https://www.instagram.com/ankitparida087/',
@@ -27,11 +34,19 @@ export const socialLinks = [
         color: '#e4405f'
     },
     {
-        id: 4,
-        name: 'Twitter / X',
+        id: 5,
+        name: 'Twitter',
         icon: FaTwitter,
         url: 'https://x.com/ParidaAnki7567',
         username: '@ParidaAnki7567',
         color: '#ffffff'
+    },
+    {
+        id: 6,
+        name: 'Codolio',  // ✅ Added Codolio
+        icon: FaCode,
+        url: 'https://codolio.com/profile/Ankit087/problemSolving/leetcode',
+        username: 'Ankit087',
+        color: '#6366f1'
     }
 ];
