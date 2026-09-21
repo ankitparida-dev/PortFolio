@@ -20,7 +20,6 @@ export const skillsData = {
         skills: [
             'Clear Communication',
             'Team Collaboration',
-            'Fast Learner',
             'Analytical Problem Solving'
         ]
     },
