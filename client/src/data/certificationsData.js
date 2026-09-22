@@ -6,8 +6,15 @@ export const certificationsData = [
         icon: '🐍',
         category: 'Programming',
         date: 'Jul 2025',
-        link: '#',
-        skills: ['Python', 'OOP', 'Scripting'],
+        link: 'https://infyspringboard.onwingspan.com',
+        credentialId: '',
+        skills: [
+            'Python Basics',
+            'Control Structures',
+            'Collections',
+            'Exception Handling',
+            'File Handling'
+        ],
         featured: true
     },
     {
@@ -17,8 +24,16 @@ export const certificationsData = [
         icon: '🌐',
         category: 'Networking',
         date: 'Nov 2025',
-        link: '#',
-        skills: ['Networking', 'Protocols', 'TCP/IP'],
+        link: 'https://www.credly.com/users/ankit-parida.868952c5/edit/badges/credly',
+        credentialId: '',
+        skills: [
+            'Application Layer Services',
+            'IPv4 Addresses',
+            'Network Media',
+            'Network Types',
+            'Protocols & Standards',
+            'Wireless Access'
+        ],
         featured: true
     },
     {
@@ -28,8 +43,15 @@ export const certificationsData = [
         icon: '🔒',
         category: 'Security',
         date: 'Jan 2025',
-        link: '#',
-        skills: ['Security Basics', 'Network Security'],
+        link: 'https://www.credly.com/users/ankit-parida.868952c5/edit/badges/credly',
+        credentialId: '',
+        skills: [
+            'Cybersecurity',
+            'Threat Detection',
+            'Cyber Best Practices',
+            'Network Vulnerabilities',
+            'Privacy and Data Confidentiality'
+        ],
         featured: true
     },
     {
@@ -39,8 +61,20 @@ export const certificationsData = [
         icon: '📊',
         category: 'Data',
         date: 'Oct 2025',
-        link: '#',
-        skills: ['Data Analysis', 'SQL', 'Databases'],
+        link: 'https://www.credly.com/users/ankit-parida.afad4e5a/edit/badges/credly',
+        credentialId: 'PWID-B0246400',
+        skills: [
+            'Data Analysis',
+            'Databases',
+            'Data Science',
+            'Clean Data',
+            'Data Analysis Process',
+            'Data Science Methodology',
+            'Data Tools',
+            'Data Visualizations',
+            'Refine Data',
+            'Watson Studio'
+        ],
         featured: true
     },
     {
@@ -52,7 +86,15 @@ export const certificationsData = [
         category: 'AI/ML',
         date: 'Mar 2026',
         link: 'https://www.credly.com/badges/c5c3647a-2918-4a48-93f0-2953315266e7/linked_in_profile',
-        skills: ['Prompt Engineering', 'LLMs', 'AI Tools'],
+        credentialId: 'PWID-B0901100',
+        skills: [
+            'Generative AI',
+            'Prompt Engineering',
+            'Large Language Models (LLM)',
+            'Prompt Engineering Approaches',
+            'Prompt Patterns',
+            'Tools for Prompt Engineering'
+        ],
         featured: true
     }
 ];

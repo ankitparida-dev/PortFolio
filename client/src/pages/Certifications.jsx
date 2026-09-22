@@ -11,7 +11,6 @@ const Certifications = () => {
             backgroundColor: 'var(--bg-secondary)'
         }}>
             <div className="container">
-                {/* Section Title */}
                 <h2 className="section-title">
                     <span className="title-text">CERTIFICATIONS</span>
                 </h2>
@@ -27,10 +26,9 @@ const Certifications = () => {
                     </p>
                 </div>
 
-                {/* Certificates Grid */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
                     gap: '2rem',
                     maxWidth: '1200px',
                     margin: '0 auto 3rem'
@@ -45,9 +43,7 @@ const Certifications = () => {
                                 transition: 'all 0.3s ease',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '1rem',
-                                position: 'relative',
-                                overflow: 'hidden'
+                                gap: '1rem'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -58,7 +54,7 @@ const Certifications = () => {
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
-                            {/* Header - Icon and Title */}
+                            {/* Header */}
                             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                                 <div style={{
                                     fontSize: '1.8rem',
@@ -101,6 +97,16 @@ const Certifications = () => {
                                             Authorized by {cert.authorizedBy}
                                         </p>
                                     )}
+                                    {cert.credentialId && (
+                                        <p style={{
+                                            color: 'var(--text-secondary)',
+                                            fontSize: '0.7rem',
+                                            fontFamily: 'monospace',
+                                            marginTop: '0.2rem'
+                                        }}>
+                                            ID: {cert.credentialId}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
 
@@ -133,7 +139,7 @@ const Certifications = () => {
                                 ))}
                             </div>
 
-                            {/* Footer - Date and Link */}
+                            {/* Footer */}
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -159,16 +165,7 @@ const Certifications = () => {
                                         textDecoration: 'none',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '5px',
-                                        transition: 'all 0.3s'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.transform = 'translateX(3px)';
-                                        e.currentTarget.style.textShadow = 'var(--neon-green-glow)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.transform = 'translateX(0)';
-                                        e.currentTarget.style.textShadow = 'none';
+                                        gap: '5px'
                                     }}
                                 >
                                     Verify <FaExternalLinkAlt size={10} />
@@ -178,120 +175,45 @@ const Certifications = () => {
                     ))}
                 </div>
 
-                {/* Stats Section */}
+                {/* Stats */}
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                     gap: '1.5rem',
                     maxWidth: '900px',
-                    margin: '0 auto'
+                    margin: '0 auto 3rem'
                 }}>
-                    <div className="card" style={{
-                        textAlign: 'center',
-                        padding: '1.5rem',
-                        transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = 'var(--neon-green-glow)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                    }}>
+                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
                         <FaAward size={32} color="var(--neon-green)" />
-                        <div style={{
-                            fontSize: '2rem',
-                            color: 'var(--neon-green)',
-                            fontWeight: 'bold',
-                            marginTop: '0.5rem'
-                        }}>
+                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
                             {certificationsData.length}
                         </div>
-                        <div style={{
-                            color: 'var(--text-secondary)',
-                            fontSize: '0.85rem',
-                            fontFamily: 'monospace'
-                        }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
                             Certifications
                         </div>
                     </div>
-
-                    <div className="card" style={{
-                        textAlign: 'center',
-                        padding: '1.5rem',
-                        transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = 'var(--neon-green-glow)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                    }}>
+                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
                         <FaCheckCircle size={32} color="var(--neon-green)" />
-                        <div style={{
-                            fontSize: '2rem',
-                            color: 'var(--neon-green)',
-                            fontWeight: 'bold',
-                            marginTop: '0.5rem'
-                        }}>
+                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
                             100%
                         </div>
-                        <div style={{
-                            color: 'var(--text-secondary)',
-                            fontSize: '0.85rem',
-                            fontFamily: 'monospace'
-                        }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
                             Verified
                         </div>
                     </div>
-
-                    <div className="card" style={{
-                        textAlign: 'center',
-                        padding: '1.5rem',
-                        transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = 'var(--neon-green-glow)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                    }}>
+                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
                         <span style={{ fontSize: '2rem' }}>🏆</span>
-                        <div style={{
-                            fontSize: '2rem',
-                            color: 'var(--neon-green)',
-                            fontWeight: 'bold',
-                            marginTop: '0.5rem'
-                        }}>
+                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
                             5
                         </div>
-                        <div style={{
-                            color: 'var(--text-secondary)',
-                            fontSize: '0.85rem',
-                            fontFamily: 'monospace'
-                        }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
                             Domains
                         </div>
                     </div>
                 </div>
 
                 {/* LinkedIn CTA */}
-                <div style={{
-                    textAlign: 'center',
-                    marginTop: '3rem'
-                }}>
-                    <p style={{
-                        color: 'var(--text-secondary)',
-                        fontSize: '0.9rem',
-                        marginBottom: '1rem'
-                    }}>
-                        View all certifications on LinkedIn
-                    </p>
+                <div style={{ textAlign: 'center' }}>
                     <a
                         href="https://linkedin.com/in/ankitparida087"
                         target="_blank"

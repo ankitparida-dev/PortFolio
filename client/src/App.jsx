@@ -2,12 +2,12 @@ import React from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
-import BackgroundElements from './components/common/BackgroundElements'; // ✅ New import
+import BackgroundElements from './components/common/BackgroundElements';
 import Home from './pages/Home';
 import About from './pages/About';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
-import Certifications from './pages/Certifications'; 
+import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 
@@ -18,6 +18,7 @@ function App() {
             case '/about': return <About />;
             case '/skills': return <Skills />;
             case '/projects': return <Projects />;
+            case '/certifications': return <Certifications />;  // ✅ ADDED THIS LINE
             case '/contact': return <Contact />;
             case '/admin': return <Admin />;
             default: return <Home />;
@@ -26,7 +27,7 @@ function App() {
 
     return (
         <ThemeProvider>
-            <BackgroundElements /> {/* ✅ Replaces MatrixRain - Full Stack theme */}
+            <BackgroundElements />
             <Navbar />
             {getPage()}
             <Footer />
