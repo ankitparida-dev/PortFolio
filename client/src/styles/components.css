@@ -5,6 +5,7 @@
     margin-bottom: 3rem;
     font-family: monospace;
     position: relative;
+    color: var(--text-primary);
 }
 
 .section-title::before {
@@ -45,7 +46,7 @@
 
 .btn-primary {
     background: var(--gradient);
-    color: #0a0a0a;
+    color: #000000;
     border: none;
     box-shadow: var(--neon-green-glow);
 }
@@ -57,7 +58,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.5s;
 }
 
@@ -67,7 +68,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 .btn-secondary {
@@ -78,7 +79,7 @@
 
 .btn-secondary:hover {
     background: var(--neon-green);
-    color: #0a0a0a;
+    color: #000000;
     transform: translateY(-2px);
     box-shadow: var(--neon-green-glow);
 }
@@ -101,7 +102,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
     transition: left 0.5s;
 }
 
@@ -151,7 +152,7 @@
 
 .profile-image:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.8);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
 }
 
 /* Skills Grid */
@@ -173,7 +174,7 @@
 }
 
 .skill-tag {
-    background: rgba(0, 255, 136, 0.05);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--neon-green);
     padding: 0.7rem 1rem;
     border-radius: 8px;
@@ -182,6 +183,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    color: var(--text-primary);
 }
 
 .skill-tag::before {
@@ -191,7 +193,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -203,6 +205,15 @@
     transform: translateY(-3px);
     box-shadow: var(--neon-green-glow);
     border-color: var(--neon-green);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.skill-tag-long {
+    white-space: normal;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Projects Grid */
@@ -223,12 +234,12 @@
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 .project-icon {
     height: 160px;
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 106, 0.05));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(212, 212, 212, 0.05));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,6 +255,11 @@
     padding: 1.5rem;
 }
 
+.project-content h3 {
+    color: var(--neon-green);
+    margin-bottom: 0.5rem;
+}
+
 .project-tech {
     display: flex;
     flex-wrap: wrap;
@@ -253,7 +269,7 @@
 
 .tech-tag {
     padding: 4px 10px;
-    background: rgba(0, 255, 136, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--neon-green);
     border-radius: 4px;
     font-size: 0.75rem;
@@ -262,7 +278,7 @@
 
 .tech-tag:hover {
     background: var(--neon-green);
-    color: #0a0a0a;
+    color: #000000;
 }
 
 .project-link {
@@ -323,7 +339,7 @@
 
 .success-message {
     padding: 1rem;
-    background: rgba(0, 255, 136, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid var(--neon-green);
     color: var(--neon-green);
     border-radius: 8px;
@@ -356,7 +372,7 @@
 
 .social-icon:hover {
     background: var(--neon-green);
-    color: #0a0a0a;
+    color: #000000;
     transform: translateY(-3px) rotate(360deg);
     box-shadow: var(--neon-green-glow);
 }
@@ -369,52 +385,4 @@
     text-align: center;
     position: relative;
     z-index: 2;
-}
-/* ✅ Soft Skills & Interests - Better visibility */
-.skills-category {
-    margin-bottom: 2rem;
-}
-
-.skills-category h3 {
-    margin-bottom: 1rem;
-    color: var(--neon-green);
-    font-family: monospace;
-    font-size: 1.3rem;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-}
-
-.skill-tag {
-    background: rgba(0, 255, 136, 0.05);
-    border: 1px solid var(--neon-green);
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-size: 0.95rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-/* ✅ For longer text, allow wrapping */
-.skill-tag-long {
-    white-space: normal;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.skill-tag:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--neon-green-glow);
-    border-color: var(--neon-green);
 }

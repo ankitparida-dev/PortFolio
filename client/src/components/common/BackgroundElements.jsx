@@ -5,75 +5,64 @@ const BackgroundElements = () => {
 
     useEffect(() => {
         const container = containerRef.current;
-        if (!container) {
-            console.log('❌ Container not found');
-            return;
-        }
+        if (!container) return;
 
-        console.log('✅ BackgroundElements mounted - Creating floating elements...');
-
-        // Clear any existing elements
         container.innerHTML = '';
 
-        // Tech Stack with symbols and colors
         const techStack = [
-            { symbol: '⚛️', name: 'React', color: '#61DAFB' },
-            { symbol: '🟢', name: 'Node.js', color: '#339933' },
-            { symbol: '🍃', name: 'MongoDB', color: '#47A248' },
-            { symbol: '📦', name: 'Express', color: '#000000' },
-            { symbol: '☕', name: 'Java', color: '#007396' },
-            { symbol: '🐍', name: 'Python', color: '#3776AB' },
-            { symbol: '🐘', name: 'PostgreSQL', color: '#336791' },
-            { symbol: '🔧', name: 'Git', color: '#F05032' },
-            { symbol: '▲', name: 'Vercel', color: '#000000' },
-            { symbol: 'JS', name: 'JavaScript', color: '#F7DF1E' }
+            { symbol: '⚛️', name: 'React' },
+            { symbol: '🟢', name: 'Node.js' },
+            { symbol: '🍃', name: 'MongoDB' },
+            { symbol: '📦', name: 'Express' },
+            { symbol: '☕', name: 'Java' },
+            { symbol: '🐍', name: 'Python' },
+            { symbol: '🐘', name: 'PostgreSQL' },
+            { symbol: '🔧', name: 'Git' },
+            { symbol: '▲', name: 'Vercel' },
+            { symbol: '🔥', name: 'Firebase' },
+            { symbol: '🐳', name: 'Docker' },
+            { symbol: '☁️', name: 'AWS' },
+            { symbol: 'TS', name: 'TypeScript' },
+            { symbol: '🎨', name: 'Tailwind' },
+            { symbol: 'JS', name: 'JavaScript' }
         ];
 
-        // Shuffle
         const shuffled = techStack.sort(() => Math.random() - 0.5);
 
         shuffled.forEach((tech, index) => {
             const el = document.createElement('div');
-            
-            // Create wrapper
+
             const wrapper = document.createElement('div');
             wrapper.style.cssText = `
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                background: rgba(0, 0, 0, 0.3);
+                background: rgba(255, 255, 255, 0.03);
                 padding: 8px 16px;
                 border-radius: 30px;
                 backdrop-filter: blur(4px);
-                border: 1px solid ${tech.color}33;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             `;
-            
-            // Symbol
+
             const symbolSpan = document.createElement('span');
             symbolSpan.textContent = tech.symbol;
-            symbolSpan.style.cssText = `
-                font-size: 20px;
-                line-height: 1;
-            `;
-            
-            // Name
+            symbolSpan.style.cssText = `font-size: 20px; line-height: 1;`;
+
             const nameSpan = document.createElement('span');
             nameSpan.textContent = tech.name;
             nameSpan.style.cssText = `
                 font-family: 'Segoe UI', sans-serif;
                 font-size: 13px;
                 font-weight: 600;
-                color: ${tech.color};
+                color: #ffffff;
                 letter-spacing: 0.5px;
             `;
-            
+
             wrapper.appendChild(symbolSpan);
             wrapper.appendChild(nameSpan);
             el.appendChild(wrapper);
-            
-            // Style the floating element
+
             el.style.cssText = `
                 position: absolute;
                 top: ${Math.random() * 90 + 5}%;
@@ -89,11 +78,10 @@ const BackgroundElements = () => {
             container.appendChild(el);
 
             setTimeout(() => {
-                el.style.opacity = '0.7';
+                el.style.opacity = '0.25';
             }, 200 + index * 50);
         });
 
-        // Add CSS animation if not exists
         if (!document.getElementById('bg-float-style')) {
             const style = document.createElement('style');
             style.id = 'bg-float-style';
@@ -103,12 +91,8 @@ const BackgroundElements = () => {
                         transform: translate(0, 0) rotate(0deg) scale(0.9);
                         opacity: 0;
                     }
-                    15% {
-                        opacity: 0.7;
-                    }
-                    80% {
-                        opacity: 0.7;
-                    }
+                    15% { opacity: 0.25; }
+                    80% { opacity: 0.25; }
                     100% {
                         transform: translate(${Math.random() * 250 - 125}px, ${-Math.random() * 350 - 100}px) rotate(${Math.random() * 360}deg) scale(0.8);
                         opacity: 0;
@@ -116,13 +100,9 @@ const BackgroundElements = () => {
                 }
             `;
             document.head.appendChild(style);
-            console.log('✅ Animation styles added');
         }
 
-        console.log(`✅ Created ${container.children.length} floating elements`);
-
         return () => {
-            console.log('🧹 Cleaning up background elements');
             container.innerHTML = '';
             const style = document.getElementById('bg-float-style');
             if (style) style.remove();
@@ -130,8 +110,8 @@ const BackgroundElements = () => {
     }, []);
 
     return (
-        <div 
-            ref={containerRef} 
+        <div
+            ref={containerRef}
             style={{
                 position: 'fixed',
                 top: 0,
@@ -142,7 +122,7 @@ const BackgroundElements = () => {
                 zIndex: 0,
                 overflow: 'hidden',
                 background: 'transparent'
-            }} 
+            }}
         />
     );
 };

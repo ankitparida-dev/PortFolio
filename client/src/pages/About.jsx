@@ -1,5 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { FaGraduationCap, FaBullseye, FaHeart, FaRocket, FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { 
+    FaGraduationCap, 
+    FaBullseye, 
+    FaHeart, 
+    FaRocket, 
+    FaPhone, 
+    FaEnvelope, 
+    FaMapMarkerAlt, 
+    FaLinkedin, 
+    FaGithub 
+} from 'react-icons/fa';
 
 const About = () => {
     const cardsRef = useRef([]);
@@ -27,7 +37,7 @@ const About = () => {
         { 
             icon: FaGraduationCap, 
             title: 'Education', 
-            color: '#00ff88',
+            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
                 <>
                     <p><strong>Chitkara University</strong></p>
@@ -36,7 +46,9 @@ const About = () => {
                         July 2024 — Present
                     </p>
                     <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
-                        <strong>Relevant Coursework:</strong> Data Structures & Algorithms (OOP Focus), Database Management Systems (DBMS), Backend & API Engineering, Computer Networks, Operating Systems Foundations
+                        <strong>Relevant Coursework:</strong> Data Structures & Algorithms (OOP Focus), 
+                        Database Management Systems (DBMS), Backend & API Engineering, Computer Networks, 
+                        Operating Systems Foundations
                     </p>
                 </>
             )
@@ -44,21 +56,31 @@ const About = () => {
         { 
             icon: FaBullseye, 
             title: 'Summary', 
-            color: '#00ff88',
+            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
                 <p style={{ fontSize: '1.05rem', lineHeight: '1.8' }}>
-                    Computer Science and Engineering student with hands-on expertise building full-stack applications using the MERN stack. Proven ability to write clean backend logic and engineer scalable software solutions to solve complex challenges.
+                    Computer Science and Engineering student with hands-on expertise building 
+                    full-stack applications using the MERN stack. Proven ability to write clean 
+                    backend logic and engineer scalable software solutions to solve complex challenges.
                 </p>
             )
         },
         { 
             icon: FaHeart, 
             title: 'What Drives Me', 
-            color: '#00ff88',
+            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
                 <>
-                    <p>I love solving complex problems through code. Whether it's optimizing algorithms or building user-friendly applications, I'm always eager to learn and grow.</p>
-                    <div style={{ marginTop: '1rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+                    <p>I love solving complex problems through code. Whether it's optimizing 
+                    algorithms or building user-friendly applications, I'm always eager to 
+                    learn and grow.</p>
+                    <div style={{ 
+                        marginTop: '1rem', 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        gap: '0.5rem', 
+                        justifyContent: 'center' 
+                    }}>
                         <span className="skill-tag">Clear Communication</span>
                         <span className="skill-tag">Team Collaboration</span>
                         <span className="skill-tag">Fast Learner</span>
@@ -70,25 +92,43 @@ const About = () => {
         { 
             icon: FaRocket, 
             title: 'Contact & Connect', 
-            color: '#00ff88',
+            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.8rem' }}>
+                <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+                    gap: '0.8rem' 
+                }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaPhone color="var(--neon-green)" /> +91 8146990416
+                        <FaPhone color="#ffffff" /> +91 8146990416
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaEnvelope color="var(--neon-green)" /> ankitparida386@gmail.com
+                        <FaEnvelope color="#ffffff" /> ankitparida386@gmail.com
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaMapMarkerAlt color="var(--neon-green)" /> Panchkula, India
+                        <FaMapMarkerAlt color="#ffffff" /> Panchkula, India
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaLinkedin color="var(--neon-green)" /> 
-                        <a href="https://linkedin.com/in/ankitparida087" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida087</a>
+                        <FaLinkedin color="#ffffff" />
+                        <a 
+                            href="https://linkedin.com/in/ankitparida087" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
+                        >
+                            ankitparida087
+                        </a>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaGithub color="var(--neon-green)" /> 
-                        <a href="https://github.com/ankitparida-dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>ankitparida-dev</a>
+                        <FaGithub color="#ffffff" />
+                        <a 
+                            href="https://github.com/ankitparida-dev" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
+                        >
+                            ankitparida-dev
+                        </a>
                     </div>
                 </div>
             )
@@ -108,10 +148,23 @@ const About = () => {
                             key={index}
                             className="card"
                             ref={el => cardsRef.current[index] = el}
-                            style={{ marginBottom: '1.5rem', textAlign: 'center', opacity: 0 }}
+                            style={{ 
+                                marginBottom: '1.5rem', 
+                                textAlign: 'center', 
+                                opacity: 0 
+                            }}
                         >
-                            <section.icon size={40} color={section.color} style={{ marginBottom: '1rem' }} />
-                            <h3 style={{ color: 'var(--neon-green)', marginBottom: '1rem' }}>{section.title}</h3>
+                            <section.icon 
+                                size={40} 
+                                color="#ffffff" 
+                                style={{ marginBottom: '1rem' }} 
+                            />
+                            <h3 style={{ 
+                                color: 'var(--text-primary)',   // ✅ WHITE heading (was green)
+                                marginBottom: '1rem' 
+                            }}>
+                                {section.title}
+                            </h3>
                             {section.content}
                         </div>
                     ))}
