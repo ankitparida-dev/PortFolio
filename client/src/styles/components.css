@@ -1,4 +1,7 @@
-/* Section Title */
+/* ============================================================
+   SECTION TITLE
+   ============================================================ */
+
 .section-title {
     text-align: center;
     font-size: 2.5rem;
@@ -29,14 +32,20 @@
     color: transparent;
 }
 
-/* Buttons */
+/* ============================================================
+   BUTTONS (Default / Dark Mode)
+   ============================================================ */
+
 .btn-primary, .btn-secondary {
     padding: 12px 28px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     transition: all 0.3s;
     font-family: monospace;
     letter-spacing: 1px;
@@ -46,7 +55,7 @@
 
 .btn-primary {
     background: var(--gradient);
-    color: #000000;
+    color: var(--bg-primary);
     border: none;
     box-shadow: var(--neon-green-glow);
 }
@@ -58,7 +67,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.5s;
 }
 
@@ -68,7 +77,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
@@ -79,12 +88,15 @@
 
 .btn-secondary:hover {
     background: var(--neon-green);
-    color: #000000;
+    color: var(--bg-primary);
     transform: translateY(-2px);
     box-shadow: var(--neon-green-glow);
 }
 
-/* Cards */
+/* ============================================================
+   CARDS
+   ============================================================ */
+
 .card {
     background: var(--bg-card);
     border: 1px solid var(--neon-green);
@@ -93,6 +105,7 @@
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    color: var(--text-primary);
 }
 
 .card::before {
@@ -116,7 +129,10 @@
     border-color: var(--neon-green);
 }
 
-/* Profile Image */
+/* ============================================================
+   PROFILE IMAGE
+   ============================================================ */
+
 .profile-wrapper {
     position: relative;
     width: 250px;
@@ -155,7 +171,10 @@
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
 }
 
-/* Skills Grid */
+/* ============================================================
+   SKILLS GRID
+   ============================================================ */
+
 .skills-category {
     margin-bottom: 2rem;
 }
@@ -216,7 +235,10 @@
     justify-content: center;
 }
 
-/* Projects Grid */
+/* ============================================================
+   PROJECTS GRID
+   ============================================================ */
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -278,7 +300,7 @@
 
 .tech-tag:hover {
     background: var(--neon-green);
-    color: #000000;
+    color: var(--bg-primary);
 }
 
 .project-link {
@@ -295,7 +317,10 @@
     transform: translateX(3px);
 }
 
-/* Contact Form */
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -355,7 +380,10 @@
     text-align: center;
 }
 
-/* Social Icons */
+/* ============================================================
+   SOCIAL ICONS
+   ============================================================ */
+
 .social-icon {
     width: 45px;
     height: 45px;
@@ -372,12 +400,15 @@
 
 .social-icon:hover {
     background: var(--neon-green);
-    color: #000000;
+    color: var(--bg-primary);
     transform: translateY(-3px) rotate(360deg);
     box-shadow: var(--neon-green-glow);
 }
 
-/* Footer */
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
 .footer {
     background: var(--bg-secondary);
     border-top: 2px solid var(--neon-green);
@@ -385,4 +416,94 @@
     text-align: center;
     position: relative;
     z-index: 2;
+}
+
+/* ============================================================
+   LIGHT MODE TEXT & ICON VISIBILITY FIX
+   ============================================================ */
+
+/* Force all general text to be black in light mode */
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4,
+body.light h5,
+body.light h6,
+body.light p,
+body.light span,
+body.light li,
+body.light strong,
+body.light div:not(.btn-primary):not(.btn-secondary) {
+    color: var(--text-primary) !important;
+}
+
+/* Force SVG Icons (React Icons) to be black in light mode */
+body.light svg {
+    color: var(--text-primary) !important;
+    fill: currentColor;
+}
+
+/* Keep specific neon text visible */
+body.light .section-title::before,
+body.light .section-title::after,
+body.light .logo-cursor,
+body.light .typed-cursor,
+body.light .typed-text,
+body.light .nav-link.active,
+body.light .social-icon,
+body.light .social-icon svg {
+    color: var(--neon-green) !important;
+    fill: var(--neon-green) !important;
+}
+
+/* Navbar links base color */
+body.light .nav-link {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================
+   LIGHT MODE UNIFIED BUTTON STYLES
+   (Makes Primary and Secondary look identical to "View All Projects")
+   ============================================================ */
+
+body.light .btn-primary,
+body.light .btn-secondary {
+    background: transparent !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+}
+
+/* Force all text and icons inside the buttons to be black */
+body.light .btn-primary *,
+body.light .btn-secondary *,
+body.light .btn-primary svg,
+body.light .btn-secondary svg,
+body.light .btn-primary i,
+body.light .btn-secondary i {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* Hover Effect: Invert to Black Background with White Text */
+body.light .btn-primary:hover,
+body.light .btn-secondary:hover {
+    background: #000000 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light .btn-primary:hover *,
+body.light .btn-secondary:hover *,
+body.light .btn-primary:hover svg,
+body.light .btn-secondary:hover svg,
+body.light .btn-primary:hover i,
+body.light .btn-secondary:hover i {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* Disable the default gradient shine effect on primary button in light mode */
+body.light .btn-primary::before {
+    display: none !important;
 }

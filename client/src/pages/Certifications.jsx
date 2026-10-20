@@ -16,19 +16,14 @@ const Certifications = () => {
                 </h2>
 
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                    <p style={{
-                        color: 'var(--text-secondary)',
-                        fontSize: '1.05rem',
-                        maxWidth: '600px',
-                        margin: '0 auto'
-                    }}>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '600px', margin: '0 auto' }}>
                         {`>_ Industry-recognized certifications in Full Stack Development`}
                     </p>
                 </div>
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
                     gap: '2rem',
                     maxWidth: '1200px',
                     margin: '0 auto 3rem'
@@ -38,12 +33,12 @@ const Certifications = () => {
                             key={cert.id}
                             className="card"
                             style={{
-                                padding: '1.8rem',
+                                padding: '0', // Removed padding to allow image to touch edges
                                 borderLeft: '4px solid var(--neon-green)',
                                 transition: 'all 0.3s ease',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '1rem'
+                                overflow: 'hidden' // Ensures image stays inside rounded corners
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -54,180 +49,70 @@ const Certifications = () => {
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
-                            {/* Header */}
-                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                                <div style={{
-                                    fontSize: '1.8rem',
-                                    background: 'var(--bg-primary)',
-                                    width: '60px',
-                                    height: '60px',
-                                    minWidth: '60px',
-                                    borderRadius: '12px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    border: '2px solid var(--neon-green)',
-                                    boxShadow: 'var(--neon-green-glow)'
-                                }}>
-                                    {cert.icon}
-                                </div>
-                                <div style={{ flex: 1 }}>
-                                    <h3 style={{
-                                        color: 'var(--neon-green)',
-                                        marginBottom: '0.3rem',
-                                        fontSize: '1.05rem',
-                                        lineHeight: '1.4'
-                                    }}>
-                                        {cert.title}
-                                    </h3>
-                                    <p style={{
-                                        color: 'var(--text-primary)',
-                                        fontSize: '0.85rem',
-                                        fontWeight: '500',
-                                        marginBottom: '0.2rem'
-                                    }}>
-                                        {cert.issuer}
-                                    </p>
-                                    {cert.authorizedBy && (
-                                        <p style={{
-                                            color: 'var(--text-secondary)',
-                                            fontSize: '0.75rem',
-                                            fontStyle: 'italic'
-                                        }}>
-                                            Authorized by {cert.authorizedBy}
-                                        </p>
-                                    )}
-                                    {cert.credentialId && (
-                                        <p style={{
-                                            color: 'var(--text-secondary)',
-                                            fontSize: '0.7rem',
-                                            fontFamily: 'monospace',
-                                            marginTop: '0.2rem'
-                                        }}>
-                                            ID: {cert.credentialId}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Category Badge */}
-                            <div>
-                                <span style={{
-                                    display: 'inline-block',
-                                    padding: '4px 12px',
-                                    background: 'rgba(0, 255, 136, 0.1)',
-                                    color: 'var(--neon-green)',
-                                    borderRadius: '20px',
-                                    fontSize: '0.7rem',
-                                    fontWeight: '600',
-                                    border: '1px solid var(--neon-green)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.5px'
-                                }}>
-                                    {cert.category}
-                                </span>
-                            </div>
-
-                            {/* Skills */}
-                            <div style={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                gap: '0.4rem'
+                            {/* ✅ Certificate Image */}
+                            <div style={{ 
+                                height: '180px', 
+                                width: '100%', 
+                                backgroundColor: '#fff',
+                                borderBottom: '1px solid var(--border)'
                             }}>
-                                {cert.skills.map((skill, i) => (
-                                    <span key={i} className="tech-tag">{skill}</span>
-                                ))}
+                                <img 
+                                    src={cert.image} 
+                                    alt={cert.title} 
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} 
+                                />
                             </div>
 
-                            {/* Footer */}
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                marginTop: 'auto',
-                                paddingTop: '0.8rem',
-                                borderTop: '1px solid var(--border)'
-                            }}>
-                                <span style={{
-                                    color: 'var(--text-secondary)',
-                                    fontSize: '0.75rem',
-                                    fontFamily: 'monospace'
-                                }}>
-                                    📅 {cert.date}
-                                </span>
-                                <a
-                                    href={cert.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        color: 'var(--neon-green)',
-                                        fontSize: '0.8rem',
-                                        textDecoration: 'none',
+                            {/* Certificate Details */}
+                            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1rem' }}>
+                                    <div style={{
+                                        fontSize: '1.5rem',
+                                        background: 'var(--bg-primary)',
+                                        width: '45px',
+                                        height: '45px',
+                                        minWidth: '45px',
+                                        borderRadius: '50%',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '5px'
-                                    }}
-                                >
-                                    Verify <FaExternalLinkAlt size={10} />
-                                </a>
+                                        justifyContent: 'center',
+                                        border: '2px solid var(--neon-green)',
+                                        boxShadow: 'var(--neon-green-glow)'
+                                    }}>
+                                        {cert.icon}
+                                    </div>
+                                    <div>
+                                        <h3 style={{ color: 'var(--neon-green)', marginBottom: '0.2rem', fontSize: '1.05rem', lineHeight: '1.3' }}>
+                                            {cert.title}
+                                        </h3>
+                                        <p style={{ color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '500' }}>
+                                            {cert.issuer}
+                                        </p>
+                                        {cert.authorizedBy && (
+                                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontStyle: 'italic' }}>
+                                                Authorized by {cert.authorizedBy}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1rem' }}>
+                                    {cert.skills.map((skill, i) => (
+                                        <span key={i} className="tech-tag">{skill}</span>
+                                    ))}
+                                </div>
+
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                                        📅 {cert.date}
+                                    </span>
+                                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="project-link" style={{ fontSize: '0.85rem' }}>
+                                        Verify <FaExternalLinkAlt size={10} />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Stats */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                    gap: '1.5rem',
-                    maxWidth: '900px',
-                    margin: '0 auto 3rem'
-                }}>
-                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
-                        <FaAward size={32} color="var(--neon-green)" />
-                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
-                            {certificationsData.length}
-                        </div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
-                            Certifications
-                        </div>
-                    </div>
-                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
-                        <FaCheckCircle size={32} color="var(--neon-green)" />
-                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
-                            100%
-                        </div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
-                            Verified
-                        </div>
-                    </div>
-                    <div className="card" style={{ textAlign: 'center', padding: '1.5rem' }}>
-                        <span style={{ fontSize: '2rem' }}>🏆</span>
-                        <div style={{ fontSize: '2rem', color: 'var(--neon-green)', fontWeight: 'bold', marginTop: '0.5rem' }}>
-                            5
-                        </div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'monospace' }}>
-                            Domains
-                        </div>
-                    </div>
-                </div>
-
-                {/* LinkedIn CTA */}
-                <div style={{ textAlign: 'center' }}>
-                    <a
-                        href="https://linkedin.com/in/ankitparida087"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary"
-                        style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            textDecoration: 'none'
-                        }}
-                    >
-                        View on LinkedIn <FaExternalLinkAlt size={12} />
-                    </a>
                 </div>
             </div>
         </section>
