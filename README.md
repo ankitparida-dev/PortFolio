@@ -61,12 +61,18 @@ A modern, interactive portfolio website built with the MERN stack. It features a
 | **MongoDB Atlas** | Cloud Database Hosting |
 
 ---
-## 📧 Contact
-Ankit Parida
 
-Platform	Link
-Email	ankitparida386@gmail.com
-LinkedIn	linkedin.com/in/ankitparida087
-GitHub	github.com/ankitparida-dev
-LeetCode	leetcode.com/u/Ankit087-acer
-⭐ If you like this portfolio, feel free to give it a star!
+## 📧 Contact
+
+**Ankit Parida**
+
+| Platform | Link |
+| :--- | :--- |
+| **Email** | [ankitparida386@gmail.com](mailto:ankitparida386@gmail.com) |
+| **LinkedIn** | [linkedin.com/in/ankitparida087](https://linkedin.com/in/ankitparida087) |
+| **GitHub** | [github.com/ankitparida-dev](https://github.com/ankitparida-dev) |
+| **LeetCode** | [leetcode.com/u/Ankit087-acer](https://leetcode.com/u/Ankit087-acer) |
+
+---
+
+⭐ **If you like this portfolio, feel free to give it a star!**
