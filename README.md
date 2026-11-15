@@ -61,32 +61,7 @@ A modern, interactive portfolio website built with the MERN stack. It features a
 | **MongoDB Atlas** | Cloud Database Hosting |
 
 ---
-
-## 📁 Project Structure
-
-```text
-PortFolio/
-├── client/                  # React Frontend
-│   ├── src/
-│   │   ├── components/      # Navbar, Footer, Background Elements
-│   │   ├── pages/           # Home, About, Skills, Projects, Certifications, Contact
-│   │   ├── data/            # Static data (Projects, Skills, Certifications)
-│   │   ├── context/         # Theme Context (Dark/Light mode)
-│   │   ├── services/        # API calls
-│   │   └── styles/          # Modular CSS (themes, components, animations)
-│   └── public/              # Resume PDF and static assets
-│
-├── server/                  # Node.js Backend
-│   ├── src/
-│   │   ├── config/          # Database connection
-│   │   ├── models/          # Mongoose schemas (Contact)
-│   │   ├── controllers/     # Route logic (Contact, GitHub)
-│   │   ├── routes/          # Express routes
-│   │   └── app.js           # Express application setup
-│   └── server.js            # Server entry point
-│
-└── README.md
-📧 Contact
+## 📧 Contact
 Ankit Parida
 
 Platform	Link
