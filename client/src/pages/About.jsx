@@ -2,13 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { 
     FaGraduationCap, 
     FaBullseye, 
-    FaHeart, 
-    FaRocket, 
-    FaPhone, 
-    FaEnvelope, 
-    FaMapMarkerAlt, 
-    FaLinkedin, 
-    FaGithub 
+    FaUsers, 
+    FaGamepad 
 } from 'react-icons/fa';
 
 const About = () => {
@@ -37,18 +32,17 @@ const About = () => {
         { 
             icon: FaGraduationCap, 
             title: 'Education', 
-            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
                 <>
-                    <p><strong>Chitkara University</strong></p>
+                    <p><strong>Chitkara University</strong> (Rajpura, India)</p>
                     <p><strong>B.E. in Computer Science and Engineering</strong></p>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
                         July 2024 — Present
                     </p>
                     <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>
                         <strong>Relevant Coursework:</strong> Data Structures & Algorithms (OOP Focus), 
-                        Database Management Systems (DBMS), Backend & API Engineering, Computer Networks, 
-                        Operating Systems Foundations
+                        Database Management Systems (DBMS), Computer Networks, Operating Systems Foundations, 
+                        Backend & API Engineering
                     </p>
                 </>
             )
@@ -56,80 +50,32 @@ const About = () => {
         { 
             icon: FaBullseye, 
             title: 'Summary', 
-            color: '#ffffff',        // ✅ WHITE (was #00ff88)
             content: (
                 <p style={{ fontSize: '1.05rem', lineHeight: '1.8' }}>
-                    Computer Science and Engineering student with hands-on expertise building 
-                    full-stack applications using the MERN stack. Proven ability to write clean 
-                    backend logic and engineer scalable software solutions to solve complex challenges.
+                    Computer Science and Engineering student with strong fundamentals in Data Structures & Algorithms, 
+                    Computer Networks, Operating Systems, and Database Management Systems. Hands-on experience 
+                    engineering scalable full-stack web applications and cloud-connected backend services.
                 </p>
             )
         },
         { 
-            icon: FaHeart, 
-            title: 'What Drives Me', 
-            color: '#ffffff',        // ✅ WHITE (was #00ff88)
+            icon: FaUsers, 
+            title: 'Soft Skills', 
             content: (
-                <>
-                    <p>I love solving complex problems through code. Whether it's optimizing 
-                    algorithms or building user-friendly applications, I'm always eager to 
-                    learn and grow.</p>
-                    <div style={{ 
-                        marginTop: '1rem', 
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
-                        gap: '0.5rem', 
-                        justifyContent: 'center' 
-                    }}>
-                        <span className="skill-tag">Clear Communication</span>
-                        <span className="skill-tag">Team Collaboration</span>
-                        <span className="skill-tag">Fast Learner</span>
-                        <span className="skill-tag">Analytical Problem Solving</span>
-                    </div>
-                </>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', justifyContent: 'center', marginTop: '0.5rem' }}>
+                    <span className="skill-tag">Active Listening</span>
+                    <span className="skill-tag">Team Collaboration</span>
+                    <span className="skill-tag">Growth Mindset</span>
+                </div>
             )
         },
         { 
-            icon: FaRocket, 
-            title: 'Contact & Connect', 
-            color: '#ffffff',        // ✅ WHITE (was #00ff88)
+            icon: FaGamepad, 
+            title: 'Interests & Languages', 
             content: (
-                <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-                    gap: '0.8rem' 
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaPhone color="#ffffff" /> +91 8146990416
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaEnvelope color="#ffffff" /> ankitparida386@gmail.com
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaMapMarkerAlt color="#ffffff" /> Panchkula, India
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaLinkedin color="#ffffff" />
-                        <a 
-                            href="https://linkedin.com/in/ankitparida087" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
-                        >
-                            ankitparida087
-                        </a>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                        <FaGithub color="#ffffff" />
-                        <a 
-                            href="https://github.com/ankitparida-dev" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
-                        >
-                            ankitparida-dev
-                        </a>
-                    </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.5rem' }}>
+                    <p><strong>Hobbies:</strong> Following international cricket tournaments, watching WWE.</p>
+                    <p><strong>Languages:</strong> Hindi (Native Proficiency), English (Professional Working Proficiency).</p>
                 </div>
             )
         }
@@ -148,23 +94,14 @@ const About = () => {
                             key={index}
                             className="card"
                             ref={el => cardsRef.current[index] = el}
-                            style={{ 
-                                marginBottom: '1.5rem', 
-                                textAlign: 'center', 
-                                opacity: 0 
-                            }}
+                            style={{ marginBottom: '1.5rem', textAlign: 'center', opacity: 0 }}
                         >
                             <section.icon 
                                 size={40} 
-                                color="#ffffff" 
+                                className="about-icon"
                                 style={{ marginBottom: '1rem' }} 
                             />
-                            <h3 style={{ 
-                                color: 'var(--text-primary)',   // ✅ WHITE heading (was green)
-                                marginBottom: '1rem' 
-                            }}>
-                                {section.title}
-                            </h3>
+                            <h3 style={{ marginBottom: '1rem' }}>{section.title}</h3>
                             {section.content}
                         </div>
                     ))}

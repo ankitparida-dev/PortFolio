@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaExternalLinkAlt, FaAward, FaCheckCircle } from 'react-icons/fa';
+import { FaAward, FaCheckCircle } from 'react-icons/fa';
 import { certificationsData } from '../data/certificationsData';
 
 const Certifications = () => {
@@ -33,12 +33,12 @@ const Certifications = () => {
                             key={cert.id}
                             className="card"
                             style={{
-                                padding: '0', // Removed padding to allow image to touch edges
+                                padding: '0', 
                                 borderLeft: '4px solid var(--neon-green)',
                                 transition: 'all 0.3s ease',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                overflow: 'hidden' // Ensures image stays inside rounded corners
+                                overflow: 'hidden' 
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -49,7 +49,7 @@ const Certifications = () => {
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
-                            {/* ✅ Certificate Image */}
+                            {/* Certificate Image */}
                             <div style={{ 
                                 height: '180px', 
                                 width: '100%', 
@@ -102,16 +102,19 @@ const Certifications = () => {
                                     ))}
                                 </div>
 
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                                {/* ✅ Removed Verify Link, Centered Date */}
+                                <div style={{ 
+                                    marginTop: 'auto', 
+                                    paddingTop: '1rem', 
+                                    borderTop: '1px solid var(--border)',
+                                    textAlign: 'center'
+                                }}>
                                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'monospace' }}>
-                                        📅 {cert.date}
+                                        📅 Issued: {cert.date}
                                     </span>
-                                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="project-link" style={{ fontSize: '0.85rem' }}>
-                                        Verify <FaExternalLinkAlt size={10} />
-                                    </a>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     ))}
                 </div>
             </div>
