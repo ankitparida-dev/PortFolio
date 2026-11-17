@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaExternalLinkAlt, FaServer, FaCheckCircle, FaStar } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaServer, FaCheckCircle, FaStar, FaHeart } from 'react-icons/fa';
 import { projectsData } from '../data/projectsData';
 
 const Projects = () => {
@@ -127,16 +127,41 @@ const Projects = () => {
                                         </ul>
                                     </div>
 
-                                    {/* Tech Stack */}
-                                    <div>
-                                        <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', fontFamily: 'monospace', fontSize: '1rem' }}>TECH STACK</h4>
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
-                                            {project.technologies.map((tech, i) => (
-                                                <span key={i} className="tech-tag" style={{ padding: '6px 14px', fontSize: '0.85rem' }}>
-                                                    {tech}
-                                                </span>
-                                            ))}
+                                    {/* Tech Stack & Contributors Column */}
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                        
+                                        {/* Tech Stack */}
+                                        <div>
+                                            <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', fontFamily: 'monospace', fontSize: '1rem' }}>TECH STACK</h4>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                                                {project.technologies.map((tech, i) => (
+                                                    <span key={i} className="tech-tag" style={{ padding: '6px 14px', fontSize: '0.85rem' }}>
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
+
+                                        {/* Contributors Section (Only for MovieMate - id: 1) */}
+                                        {project.id === 1 && (
+                                            <div>
+                                                <h4 style={{ color: 'var(--neon-green)', marginBottom: '1rem', fontFamily: 'monospace', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                    <FaHeart size={14} /> CONTRIBUTORS
+                                                </h4>
+                                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
+                                                    <span className="tech-tag" style={{ padding: '6px 14px', fontSize: '0.85rem', border: '1px solid var(--neon-green)' }}>
+                                                        Rangan Biswas
+                                                    </span>
+                                                    <span className="tech-tag" style={{ padding: '6px 14px', fontSize: '0.85rem', border: '1px solid var(--neon-green)' }}>
+                                                        Pushkar Ahuja
+                                                    </span>
+                                                    <span className="tech-tag" style={{ padding: '6px 14px', fontSize: '0.85rem', border: '1px solid var(--neon-green)' }}>
+                                                        Nipun Singh
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+
                                     </div>
 
                                 </div>
